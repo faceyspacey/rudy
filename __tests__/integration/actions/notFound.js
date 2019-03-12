@@ -14,12 +14,17 @@ createTest('dispatch(notFound(state))', {}, [
   notFound({ foo: 'bar' })
 ])
 
-const { routes } = createScene({
+
+const { actions, routes } = createScene({
   FIRST: '/first',
   NOT_FOUND: {
     path: '/scene-level-not-found'
+  },
+  SECOND: {
+    path: '/second/:param'
   }
-}, { scene: 'scene' })
+}, { scene: 'scene', basename: '/base' })
+
 
 createTest('dispatch(notFound(state, forcedType))', routes, [
   notFound({ foo: 'bar' }, 'scene/NOT_FOUND') // createScene passes an alternate NOT_FOUND type
@@ -27,4 +32,12 @@ createTest('dispatch(notFound(state, forcedType))', routes, [
 
 createTest('dispatch(push("/non-existent")) keeps current scene', routes, [
   push('/non-existent')
+])
+
+createTest('actionToUrl(improperlyFormattedAction)', routes, { basenames: ['/base'] }, [
+  actions.second({ params: { miss: 'bla' } })
+])
+
+createTest('actionToUrl(wrongBaseName)', routes, { basenames: ['/wrong-base'] }, [
+  actions.second({ params: { param: 'bla' } })
 ])
