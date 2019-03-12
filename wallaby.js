@@ -9,6 +9,7 @@ module.exports = wallaby => {
     files: [
       { pattern: 'src/**/*.js', load: false },
       { pattern: 'package.json', load: false },
+      { pattern: '.testsConfig.json', load: false },
       { pattern: '__tests__/**/*.snap', load: false },
       { pattern: '__helpers__/**/*.js', load: false },
       { pattern: '__test-helpers__/**/*.js', load: false }
