@@ -73,12 +73,12 @@ createTest('dispatch(jump(n))', routes, [], async ({ dispatch, snap }) => {
 
   await snap(jump(-1))
 
-  // await dispatch(({ history }) => {
-  //   expect(history.canJump(1)).toEqual(true)
-  //   expect(history.canJump(-1)).toEqual(false)
-  // })
+  await dispatch(({ history }) => {
+    expect(history.canJump(1)).toEqual(true)
+    expect(history.canJump(-1)).toEqual(false)
+  })
 
-  // await snap(jump(1))
+  await snap(jump(1))
 })
 
 createTest('dispatch(jump(n, byIndex === true, act))', routes, [], async ({ dispatch, snap }) => {

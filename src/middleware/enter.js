@@ -1,6 +1,6 @@
 import { isServer, redirectShortcut } from '../utils'
 
-export default (api) => async (req, next) => {
+export default (api) => (req, next) => {
   if (req.route.redirect) {
     return redirectShortcut(req)
   }

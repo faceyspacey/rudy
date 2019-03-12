@@ -1,5 +1,795 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`d: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`d: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`d: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`d: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`d: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dis: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dis: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dis: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dis: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dis: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dis;at: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dis;at: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dis;at: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dis;at: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dis;at: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispat: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispat: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispat: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispat: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispat: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch(: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch(: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch(: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
 exports[`dispatch(notFound()): 1 - response 1`] = `
 Object {
   "basename": "",
@@ -338,14 +1128,14 @@ Object {
         "location": Object {
           "key": "345678",
           "pathname": "/first",
-          "scene": "",
+          "scene": "scene",
           "search": "",
           "url": "/first",
         },
         "params": Object {},
         "query": Object {},
         "state": Object {},
-        "type": "FIRST",
+        "type": "scene/FIRST",
       },
       Object {
         "basename": "",
@@ -380,14 +1170,14 @@ Object {
         "index": 0,
         "key": "345678",
         "pathname": "/first",
-        "scene": "",
+        "scene": "scene",
         "search": "",
         "url": "/first",
       },
       "params": Object {},
       "query": Object {},
       "state": Object {},
-      "type": "FIRST",
+      "type": "scene/FIRST",
     },
     "scene": "scene",
     "search": "",
@@ -420,14 +1210,14 @@ Object {
         "location": Object {
           "key": "345678",
           "pathname": "/first",
-          "scene": "",
+          "scene": "scene",
           "search": "",
           "url": "/first",
         },
         "params": Object {},
         "query": Object {},
         "state": Object {},
-        "type": "FIRST",
+        "type": "scene/FIRST",
       },
       Object {
         "basename": "",
@@ -464,14 +1254,14 @@ Object {
         "index": 0,
         "key": "345678",
         "pathname": "/first",
-        "scene": "",
+        "scene": "scene",
         "search": "",
         "url": "/first",
       },
       "params": Object {},
       "query": Object {},
       "state": Object {},
-      "type": "FIRST",
+      "type": "scene/FIRST",
     },
     "query": Object {},
     "scene": "scene",
@@ -489,6 +1279,1902 @@ Object {
 `;
 
 exports[`dispatch(notFound(state, forcedType)): 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch(push("/non-existent")) : 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) : 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) : 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) : 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) : 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch(push("/non-existent")) k: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) k: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) k: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) k: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) k: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch(push("/non-existent")) kee: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) kee: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) kee: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) kee: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) kee: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch(push("/non-existent")) keeps cur: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) keeps cur: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) keeps cur: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) keeps cur: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) keeps cur: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch(push("/non-existent")) keeps current s: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) keeps current s: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) keeps current s: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) keeps current s: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) keeps current s: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch(push("/non-existent")) keeps current scene: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) keeps current scene: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) keeps current scene: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) keeps current scene: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) keeps current scene: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch(push("/non-existent")) kes: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) kes: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) kes: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) kes: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) kes: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch(push("/non-existent")) kesp: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) kesp: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) kesp: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")) kesp: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")) kesp: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch(push("/non-existent")): 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")): 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")): 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch(push("/non-existent")): 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push("/non-existent")): 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch(push(/non-existent")): 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push(/non-existent")): 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch(push(/non-existent")): 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch(push(/non-existent")): 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch(push(/non-existent")): 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dispatch: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dispatch: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dispatch: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dispatch: 1 - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`dius: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dius: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`dius: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`dius: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`dius: 1 - title 1`] = `"scene/NOT_FOUND"`;
 
 exports[`notFound on first load: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
 
@@ -679,3 +3365,1109 @@ Object {
 `;
 
 exports[`notFound on first load: firstRoute - /non-existent - 1 - title 1`] = `"NOT_FOUND"`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/no",null]}} - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/no",
+          "scene": "scene",
+          "search": "",
+          "url": "/no",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/no",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/no",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/no",null]}} - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/no",null]}} - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/no",null]}} - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/no",
+          "scene": "scene",
+          "search": "",
+          "url": "/no",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/no",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/no",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/no",null]}} - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-e",null]}} - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-e",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-e",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-e",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-e",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-e",null]}} - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-e",null]}} - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-e",null]}} - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-e",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-e",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-e",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-e",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-e",null]}} - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-ex",null]}} - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-ex",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-ex",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-ex",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-ex",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-ex",null]}} - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-ex",null]}} - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-ex",null]}} - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-ex",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-ex",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-ex",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-ex",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-ex",null]}} - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-existent",null]}} - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-existent",null]}} - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-existent",null]}} - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-existent",null]}} - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-existent",null]}} - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-existfent",null]}} - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existfent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existfent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existfent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existfent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-existfent",null]}} - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-existfent",null]}} - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-existfent",null]}} - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existfent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existfent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existfent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existfent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/non-existfent",null]}} - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/second",null]}} - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/second",
+          "scene": "scene",
+          "search": "",
+          "url": "/second",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/second",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/second",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/second",null]}} - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/second",null]}} - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/second",null]}} - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/second",
+          "scene": "scene",
+          "search": "",
+          "url": "/second",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/second",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/second",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: {"type":"@@rudy/CALL_HISTORY","payload":{"method":"push","args":["/second",null]}} - title 1`] = `"scene/NOT_FOUND"`;
+
+exports[`test scene finding when already on scene: 1 - response 1`] = `
+Object {
+  "basename": "",
+  "hash": "",
+  "location": Object {
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "scene": "scene",
+    "search": "",
+    "status": 404,
+    "url": "/non-existent",
+  },
+  "params": Object {},
+  "query": Object {},
+  "state": Object {},
+  "type": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+
+exports[`test scene finding when already on scene: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+
+exports[`test scene finding when already on scene: 1 - state 1`] = `
+Object {
+  "location": Object {
+    "basename": "",
+    "blocked": null,
+    "direction": "forward",
+    "entries": Array [
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/first",
+          "scene": "scene",
+          "search": "",
+          "url": "/first",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/FIRST",
+      },
+      Object {
+        "basename": "",
+        "hash": "",
+        "location": Object {
+          "key": "345678",
+          "pathname": "/non-existent",
+          "scene": "scene",
+          "search": "",
+          "url": "/non-existent",
+        },
+        "params": Object {},
+        "query": Object {},
+        "state": Object {},
+        "type": "scene/NOT_FOUND",
+      },
+    ],
+    "from": null,
+    "hash": "",
+    "index": 1,
+    "key": "345678",
+    "kind": "push",
+    "length": 2,
+    "n": 1,
+    "params": Object {},
+    "pathname": "/non-existent",
+    "pop": false,
+    "prev": Object {
+      "basename": "",
+      "hash": "",
+      "location": Object {
+        "index": 0,
+        "key": "345678",
+        "pathname": "/first",
+        "scene": "scene",
+        "search": "",
+        "url": "/first",
+      },
+      "params": Object {},
+      "query": Object {},
+      "state": Object {},
+      "type": "scene/FIRST",
+    },
+    "query": Object {},
+    "scene": "scene",
+    "search": "",
+    "state": Object {},
+    "status": 404,
+    "type": "scene/NOT_FOUND",
+    "universal": false,
+    "url": "/non-existent",
+  },
+  "title": "scene/NOT_FOUND",
+}
+`;
+
+exports[`test scene finding when already on scene: 1 - title 1`] = `"scene/NOT_FOUND"`;
