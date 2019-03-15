@@ -26,7 +26,13 @@ export default (initialState: Object, routes: RoutesMap) => (
     const { type, params, query, state, hash, basename } = action
     const { universal } = st
     const s = { type, params, query, state, hash, basename, universal, ...l }
-    if (st.ready === false) s.ready = true
+    // if (st.ready === false) s.ready = true
+    s.ready = r._isAsync && st.ready !== false && !action.cached // non async routes always ready; if it was false before a thunk ran in START mode which completes on enter; lastly if it's cached, its also always ready
+      ? false
+      : true
+
+    // st.ready === false ? true : false
+    console.log(action.type, s.ready)
     return s
   }
 

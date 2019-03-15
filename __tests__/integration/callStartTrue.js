@@ -6,8 +6,6 @@ import {
   enter
 } from '../../src/middleware'
 
-import { compose } from '../../src/core'
-
 createTest('call({ start: true })', {
   SECOND: {
     path: '/second',

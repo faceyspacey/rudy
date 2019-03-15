@@ -83,7 +83,8 @@ module.exports = wallaby => {
 
       // '__tests__/integration/middlewareAsFunction.js',
       // '__tests__/integration/routeLevelMiddleware.js',
-      // '__tests__/integration/callStartTrue.js',
+      '__tests__/integration/callStartTrue.js',
+      '__tests__/integration/readyState.js',
 
       // '__tests__/integration/async.js',
       // '__tests__/integration/onError.js',
@@ -104,7 +105,7 @@ module.exports = wallaby => {
       // '__tests__/integration/browser/history/set.js',
       // '__tests__/integration/actions/history.js',
       // '__tests__/integration/browser/actionsInCallbacks/resetOnLoad.js',
-      '__tests__/integration/actions/notFound.js',
+      // '__tests__/integration/actions/notFound.js',
     ],
 
     env: {

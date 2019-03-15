@@ -33,6 +33,7 @@ export default (
   types.forEach(type => {
     const route = formatRoute(routes[type], type, routes, formatter, isAddRoutes)
     route.type = type
+    route._isAsync = !!route.thunk
     routes[type] = route
   })
 

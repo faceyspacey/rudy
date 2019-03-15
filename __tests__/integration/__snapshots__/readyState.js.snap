@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`call({ start: true }): 1 - response 1`] = `
+exports[`ready === true when route thunk response is cached: 1 - response 1`] = `
 Object {
   "basename": "",
-  "cached": false,
+  "cached": true,
   "hash": "",
   "location": Object {
     "blocked": null,
@@ -70,20 +70,25 @@ Object {
     "url": "/second",
   },
   "params": Object {},
-  "payload": "SUCCESS!!",
   "query": Object {},
   "state": Object {},
   "type": "SECOND",
 }
 `;
 
-exports[`call({ start: true }): 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
+exports[`ready === true when route thunk response is cached: 1 - routes - NEVER_USED_PATHLESS - thunk 1`] = `0`;
 
-exports[`call({ start: true }): 1 - routes - REDIRECTED - onComplete 1`] = `0`;
+exports[`ready === true when route thunk response is cached: 1 - routes - REDIRECTED - onComplete 1`] = `0`;
 
-exports[`call({ start: true }): 1 - routes - SECOND - thunk 1`] = `1`;
+exports[`ready === true when route thunk response is cached: 1 - routes - SECOND - beforeEnter 1`] = `1`;
 
-exports[`call({ start: true }): 1 - state 1`] = `
+exports[`ready === true when route thunk response is cached: 1 - routes - SECOND - onComplete 1`] = `1`;
+
+exports[`ready === true when route thunk response is cached: 1 - routes - SECOND - onEnter 1`] = `1`;
+
+exports[`ready === true when route thunk response is cached: 1 - routes - SECOND - thunk 1`] = `0`;
+
+exports[`ready === true when route thunk response is cached: 1 - state 1`] = `
 Object {
   "location": Object {
     "basename": "",
@@ -157,8 +162,8 @@ Object {
     "universal": false,
     "url": "/second",
   },
-  "title": "SECOND - \\"SUCCESS!!\\"",
+  "title": "SECOND",
 }
 `;
 
-exports[`call({ start: true }): 1 - title 1`] = `"FIRST"`;
+exports[`ready === true when route thunk response is cached: 1 - title 1`] = `"SECOND"`;

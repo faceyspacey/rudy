@@ -64,6 +64,8 @@ export class Request {
     this.tmp.committed = true
     this.history.pendingPop = null
 
+    this.action.cached = this.cache.isCached('thunk', this.route, this)
+
     return Promise.resolve(this.commitDispatch(this.action)) // syncronous 99% percent of the time (state needs to be updated before history updates URL etc)
       .then((res) => {
         if (!this.commitHistory) return res
