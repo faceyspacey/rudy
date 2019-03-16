@@ -29,7 +29,7 @@ The achilles heel of this aspect is that it's both *"mini"* and *"multi"*.
 
 Because it's *"multi,"* time travelling such systems becomes impossible in reality. Dreams of completely automated testing systems based on arrays of Redux actions go out the window because it's impossible to coordinate across more than one store. 
 
-The fact that each contained microcosm of state is *"mini"* means you're always struggling to get the state you need where you need it as your app expands or as you refactor it (again the "lifting state/fx" slog).
+The fact that each contained microcosm of state is *"mini"* means you're always struggling to get the state you need where you need it as your app expands or as you refactor it (again the "lifting state/fx" slog). And that's not to mention that lifting and drilling results in perf losses, which are noticeably in heavily animated apps.
 
 Traditionally single state store systems like Redux on the other hand don't have these problems, but fall behind in modularity. When was the last time you saw a set of Redux components + reducers + actions on NPM to snatch up and grab?? *Never.* Those action types and reducer state keys are not guaranteed to be unique. In fact they are pretty much guaranteed to *conflict somewhere with the existing actions of your app.*
 
