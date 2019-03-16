@@ -285,7 +285,7 @@ export default createModule((options) => ({
   routes: {
     OPEN_CART: {
       // path: '/cart',
-      path: options.openCartPath, // eg: u could choose paths used from the parent module
+      path: options.openCartPath, // eg: the parent module could choose paths
       thunk: ({ stripe, payload }) => stripe.findCartItems(payload)
     },
     CHARGE: {},
