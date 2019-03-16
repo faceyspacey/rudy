@@ -268,7 +268,7 @@ Also note, that within the stripe checkout module, you could leave out the `CHEC
 The following section covering the compile time babel implementation will describe how components can know what module they are part of, which accordingly allows for leaving out parent module namespacing.
 
 
-### ONE LAST THING:
+### ONE LAST THING (Module Parameterization):
 
 Modules can be parameterized. For example, the parent module can choose paths used by the child module:
 
