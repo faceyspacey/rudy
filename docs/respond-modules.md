@@ -79,7 +79,7 @@ And last but not least, routes and their paths must not conflict. For example, w
 
 ### Example
 
-`$ yarn add stripe-cart`
+`$ yarn add respond-stripe-cart`
 
 ```js
 import { createModule } from 'respond-framework'
@@ -145,7 +145,7 @@ export default createModule({
 
 ```js
 import createApp, { Route } from 'respond-framework'
-import stripeModule from 'stripe-cart'
+import stripeModule from 'respond-stripe-cart'
 
 const { store, firstRoute } createApp({
   reducer, // previously in Reduxlandia: createStore(reducer, initialState, enhancer)
@@ -172,7 +172,7 @@ const { store, firstRoute } createApp({
     },
     CHECKOUT: {
       path: '/checkout',
-      load: () => import('stripe-cart'),
+      load: () => import('respond-stripe-cart'),
     }
   }
 }, options, middlewares)
@@ -211,7 +211,7 @@ const routes = {
 
 ```js
 CHECKOUT: {
-  load: () => import('stripe-cart'),
+  load: () => import('respond-stripe-cart'),
 }
 ```
 
@@ -292,7 +292,7 @@ export default createModule((options) => ({
 
 ```js
 CHECKOUT: {
-  load: () => import('stripe-cart').then(module => module({ openCartPath: '/foo' })),
+  load: () => import('respond-stripe-cart').then(module => module({ openCartPath: '/foo' })),
 }
 ```
 
@@ -301,7 +301,7 @@ There's also a very powerful feature--similar to parameterization--for the paren
 
 ```js
 CHECKOUT: {
-  load: () => import('stripe-cart'),
+  load: () => import('respond-stripe-cart'),
   stateMappings: {
     user: 'session'
   }
