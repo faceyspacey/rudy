@@ -343,6 +343,9 @@ components: {
 },
 ```
 
+> The idea is that the parent module has `state.user` with the user session object, and rather than duplicate this data (in some way that likely causes lots of unnecessary additional renderings), we just unveil otherwise hidden pieces of state. How it's done will be described in the implementation section, but the hint is that proxies once again come to the rescue to de-couple and make this connection under the hood.
+
+
 There may also be a need for `actionMappings`, but it's not clear yet. 
 
 In short, both mappings are form of specialized props or parameters to give child modules special access to *how the parent module sees the store*. Notice the argument/prop isn't a `store` or state value itself. Rather, it's a mapping in string form. The reason should be clear by now: **the same store is used across all modules; we are just using guaranteed to be unique non-conflicting naming to key into it!** This is our secret sauce.  
