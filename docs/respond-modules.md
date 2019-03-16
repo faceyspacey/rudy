@@ -210,7 +210,7 @@ CHECKOUT: {
 *In which case, we used the "route" solely for its namespacing capabilities (i.e. not path nesting, and not thunk nesting).* ***This is the essence of how Respond circumvents name collisions like ES6 Modules!***
 
 
-As far as state goes, only the child module has access to its self-contained state, eg: `cartVisible`. Behind the scenes, the state being accessed is `state.checkout.cartVisible`. 
+**Next,** as far as state goes, only the child module has access to its self-contained state, eg: `cartVisible`. Behind the scenes, the state being accessed is `state.checkout.cartVisible`. 
 
 The real magic is not just that it has its own state, but these aspects of the implementation:
 
@@ -222,7 +222,7 @@ Actions like `actions.checkout.openCart` (which of course correspond to he `OPEN
 
 > currently we're undecided as to whether only higher modules can access actions, or if *all* modules can. Possibly just higher, and lower modules must be passed such actions as props. 
 
-Lastly, our module's components are automatically code split via our `<Route />` component:
+**Lastly**, our module's components are automatically code split via our `<Route />` component:
 
 ```js
 <Route path='/' component='CHECKOUT.ShoppingCart' />
