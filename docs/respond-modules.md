@@ -354,7 +354,7 @@ In short, both mappings are form of specialized props or parameters to give chil
 
 ### Big Picture Conclusion
 
-Weirdly enough, as straightforward as it is, keying into a flat hash for namespacing is sophisticated enough to power deep trees of components + modules with the correct state, actions and side-effects they are supposed to have access to. 
+Weirdly enough, as straightforward as it is, keying into a flat hash for namespacing is sophisticated enough to power deep trees of components with the correct state (as well as actions and side-effects they are supposed to have access to). 
 
 Our far flatter state + side-effects system is able to run side by side with a highly nested component tree structure. 
 
