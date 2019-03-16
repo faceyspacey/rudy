@@ -343,7 +343,7 @@ components: {
 },
 ```
 
-> The idea is that the parent module has `state.user` with the user session object, and rather than duplicate this data (in some way that likely causes lots of unnecessary additional renderings), we just unveil otherwise hidden pieces of state. How it's done will be described in the implementation section, but the hint is that proxies once again come to the rescue to de-couple and make this connection under the hood.
+> The idea is that the parent module has `state.user` with the user session object, and rather than duplicate this data (in some way that likely causes lots of unnecessary additional renderings), we just unveil otherwise hidden pieces of pre-existing parent state. How it's done will be described in the implementation section, but the hint is that proxies once again come to the rescue to de-couple and make this connection under the hood.
 
 
 There may also be a need for `actionMappings`, but it's not clear yet. 
