@@ -147,7 +147,7 @@ const { store, firstRoute } createApp({
     App: (props, state, actions) => {
       return (
         <div>
-          <Route path='/' component='CHECKOUT.ShoppingCart' />
+          <Route path='/' component='CHECKOUT.ShoppingCart' /> // automatically code-split
 
           <h3>Child slices of state are not available in the parent module:</h3>
           <span>{state.cartVisible}</span>
