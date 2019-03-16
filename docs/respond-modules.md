@@ -207,7 +207,7 @@ const routes = {
 ```
 
 
-**Secondly**, the result is that we have actions namespaced with `checkout.` and paths prefixed like `'/checkout/cart'`. In essence a module also became a nested route! We could have choose to forego the path prefixing, just by not including it like this:
+**Secondly**, the result is that we have actions namespaced with `checkout.` and paths prefixed like `'/checkout/cart'`. In essence a module also became a nested route! We could have chosen to forego the path prefixing by not including it like this:
 
 ```js
 CHECKOUT: {
@@ -222,9 +222,9 @@ CHECKOUT: {
 
 The real magic is not just that it has its own state, but these aspects of the implementation:
 
-- **we are able to defer the name selected for the module's namespace, `checkout`, until the module is included in a real application parent module**
-- **the a single state store is used behind the secnes, allowing for easy testing + time traveling**
-- **descendant components within the same module also are informed of the state slice they have access to, which is due to our babel compilation time implementation that will be described in the next section**
+- **that we are able to defer resolution of the name selected for a module's namespace--which within a module is unknown and impossible to avoid conflicting--until the module is included in a real application parent module (e.g. when resolves to `checkout` in the above example)**
+- **that a single state store is used behind the secnes, allowing for easy testing + time traveling**
+- **that descendant components within the same module also are informed of the state slice they have access to, which is due to our babel compilation time implementation that will be described in the next section**
 
 Actions like `actions.checkout.openCart` (which of course correspond to he `OPEN_CART` route and action type) are however available throughout the whole app, in order to facilitate key capabilities like linking between modules!
 
@@ -236,7 +236,7 @@ Actions like `actions.checkout.openCart` (which of course correspond to he `OPEN
 <Route path='/' component='CHECKOUT.ShoppingCart' />
 ```
 
-The main thing to notice is that component's are passed as a string--this is because they don't exist yet, and because they will becoming from state using these keys. State will have this:
+The main thing to notice is that component's are passed as a string--this is because they don't exist yet, and because they will be coming from state using these keys. State will have this:
 
 ```js
 state.location.components = {
@@ -246,7 +246,9 @@ state.location.components = {
 }
 ```
 
-Similar to action types being injected into reducers, and the correct action creators being passed as the 3rd argument to reducers, and the state passed being the correct namespaced slice to begin with, *components themselves are made available via dependency injection*. In this case directly via state. If it's not loaded, you can display a spinner using suspense:
+Similar to the strategies used with the arguments passed to reducers and components, *components themselves are made available via dependency injection*. In this case directly via state. 
+
+If it's not loaded, you can display a spinner using suspense:
 
 ```js
   <Suspense>
@@ -254,7 +256,7 @@ Similar to action types being injected into reducers, and the correct action cre
   </Suspense>
 ```
 
-Also note, that within the stripe checkout module, you could leaveout the `CHECKOUT` namepsacing:
+Also note, that within the stripe checkout module, you could leave out the `CHECKOUT` namepsacing:
 
 ```js
   <Suspense>
@@ -263,8 +265,101 @@ Also note, that within the stripe checkout module, you could leaveout the `CHECK
 ```
 
 
-The following section covering the compile time babel implementation will cover how components can know what module they are part of, which accordingly allows for leaving out parent module namespacing.
+The following section covering the compile time babel implementation will describe how components can know what module they are part of, which accordingly allows for leaving out parent module namespacing.
 
+
+### ONE LAST THING:
+
+Modules can be parameterized. For example, the parent module can choose paths used by the child module:
+
+```js
+import { createModule } from 'respond-framework'
+
+export default createModule((options) => ({
+  routes: {
+    OPEN_CART: {
+      // path: '/cart',
+      path: options.openCartPath, // eg: the parent module could choose paths
+      thunk: ({ stripe, payload }) => stripe.findCartItems(payload)
+    },
+    CHARGE: {},
+    CONFIRMATION: {}
+  }
+}))
+```
+
+*parent module/app:*
+
+```js
+CHECKOUT: {
+  load: () => import('stripe-cart').then(module => module({ openCartPath: '/foo' })),
+}
+```
+
+
+There's also a very powerful feature--similar to parameterization--for the parent module to give the child access to parent state. It's tentatively called `stateMappings`:
+
+```js
+CHECKOUT: {
+  load: () => import('stripe-cart'),
+  stateMappings: {
+    user: 'session'
+  }
+}
+```
+
+Now anywhere within the child module, `state.session`, is available, eg:
+
+```js
+OPEN_CART: {
+  path: '/cart',
+  thunk: ({ stripe, payload, state }) => stripe.findCartItems(state.session, payload)
+},
+```
+
+or in a component:
+
+
+```js
+components: {
+  ShoppingCart: (props, state, actions) => {
+    const { cartVisible, cartItems, session } = state
+    const { openCart, charge, back } = actions
+
+    return (
+      <div>
+        <h1>You ready for checkout, {session.firstName}</h1>
+        {cartVisible &&
+          <ModalCart
+            open={openCart}
+            close={back}
+            items={cartItems}
+            button={charge}
+          />
+        }
+      </div>
+    )
+  }
+},
+```
+
+There may also be a need for `actionMappings`, but it's not clear yet. 
+
+In short, both mappings are form of specialized props or parameters to give child modules special access to *how the parent module sees the store*. Notice the argument/prop isn't a `store` or state value itself. Rather, it's a mapping in string form. The reason should be clear by now: **the same store is used across all modules; we are just using guaranteed to be unique non-conflicting naming to key into it!** This is our secret sauce.  
+
+
+
+### Big Picture Conclusion
+
+Weirdly enough, as straightforward as it is, keying into a flat hash for namespacing is sophisticated enough to power deep trees of components + modules with the correct state, actions and side-effects they are supposed to have access to. 
+
+Our far flatter state + side-effects system is able to run side by side with a highly nested component tree structure. 
+
+You have to keep in mind, our nested routes/modules will on average be only 2-3 levels deep, and probably max out at 5 levels for 99% of all apps. Whereas, component trees can easily go 100 levels deep. 
+
+In one you can easily produce linear/horizontal orchestrations of side-effect calling. In the other you are pulling out your hair, asking: "where is XYZ happening!!?!?!?!???"
+
+**Respond Framework** merges and reconciles the best of both worlds via a compile-time-generated namespacing system.
 
 
 ## Implementation
@@ -284,20 +379,4 @@ load: ({ params }) => import(`foo/${params.param}`)
 
 - what about loading `routes` that correspond to a single route?
 
-- what about parameterized modules!, eg:
 
-```js
-import { createModule } from 'respond-framework'
-
-export default createModule((options) => ({
-  routes: {
-    OPEN_CART: {
-      // path: '/cart',
-      path: options.openCartPath, // eg: the parent module could choose paths
-      thunk: ({ stripe, payload }) => stripe.findCartItems(payload)
-    },
-    CHARGE: {},
-    CONFIRMATION: {}
-  }
-}))
-```
