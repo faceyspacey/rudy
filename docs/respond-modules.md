@@ -31,9 +31,11 @@ Because it's *"multi,"* time travelling such systems becomes impossible in reali
 
 The fact that each contained microcosm of state is *"mini"* means you're always struggling to get the state you need where you need it as your app expands or as you refactor it (again the "lifting state/fx" slog). And that's not to mention that lifting and drilling results in perf losses, which are very noticeable in the form of jank within heavily animated apps.
 
-Traditionally single state store systems like Redux on the other hand don't have these problems, but fall behind in modularity. When was the last time you saw a set of Redux components + reducers + actions on NPM to snatch up and grab?? *Never.* Those action types and reducer state keys are not guaranteed to be unique. In fact they are pretty much guaranteed to *conflict somewhere with the existing actions of your app.*
+Traditionally single state store systems like Redux on the other hand don't have these problems, but fall short in modularity. When was the last time you saw a set of Redux components + reducers + actions on NPM to snatch up and grab?? *Never.* Those action types and reducer state keys are not guaranteed to be unique. In fact they are pretty much guaranteed to *conflict somewhere with the existing actions of your app.*
 
-So whatever solution that comes to the rescue it's going to revolve around namespacing those action types and reducer state keys. 
+So whatever solution that comes to the rescue, it's going to revolve around namespacing those action types and reducer state keys. 
+
+### Characteristics of Modules
 
 We can take a page from the **ES6 Modules** playbook to see what characteristics we seek:
 
