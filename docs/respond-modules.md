@@ -136,7 +136,7 @@ export default createModule({
 
 
 ```js
-import createApp, { Route } from 'respond-framework' // combination of createStore + createRouter
+import createApp, { Route } from 'respond-framework'
 import stripeModule from 'stripe-cart'
 
 const { store, firstRoute } createApp({
