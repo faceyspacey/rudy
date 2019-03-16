@@ -38,13 +38,13 @@ So whatever solution that comes to the rescue it's going to revolve around names
 We can take a page from the **ES6 Modules** playbook to see what characteristics we seek:
 
 
-*MyComponentA.js
+*MyComponentA.js*
 ```js
 import { MyComponentB as Component } from './MyComponentB.js'
 ```
 
 
-*MyComponentB.s
+*MyComponentB.s*
 ```js
 export const MyComponentB = (props, state, actions) => {}
 
