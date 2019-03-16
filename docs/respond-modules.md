@@ -262,3 +262,42 @@ The following section covering the compile time babel implementation will cover 
 ## Implementation
 
 coming soon...
+
+
+
+
+## Questions
+
+
+- how to deal with dynamic segments in dynamic imports: 
+```js
+load: ({ params }) => import(`foo/${params.param}`)
+```
+
+- what about loading `routes` that correspond to a single route?
+
+- what about parameterized modules!, eg:
+
+```js
+import { createModule } from 'respond-framework'
+
+export default createModule((options) => {
+  routes: {
+    OPEN_CART: {
+      // path: '/cart',
+      path: options.openCartPath, // eg: u could choose paths used from the parent module
+      thunk: ({ stripe, payload }) => stripe.findCartItems(payload)
+    },
+    CHARGE: { // pathless route
+      thunk: async ({ stripe, payload, actions }) => {
+        const { amount } = payload
+        await stripe.charge(amount)
+        return actions.confirmation() // change routes (notice no dispatch necessary)
+      }
+    },
+    CONFIRMATION: {
+      path: '/thank-you',
+    }
+  }
+})
+```
