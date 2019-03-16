@@ -222,6 +222,41 @@ Actions like `actions.checkout.openCart` (which of course correspond to he `OPEN
 
 > currently we're undecided as to whether only higher modules can access actions, or if *all* modules can. Possibly just higher, and lower modules must be passed such actions as props. 
 
+Lastly, our module's components are automatically code split via our `<Route />` component:
+
+```js
+<Route path='/' component='CHECKOUT.ShoppingCart' />
+```
+
+The main thing to notice is that component's are passed as a string--this is because they don't exist yet, and because they will becoming from state using these keys. State will have this:
+
+```js
+state.location.components = {
+  CHECKOUT: {
+    ShoppingCart: function() {}
+  }
+}
+```
+
+Similar to action types being injected into reducers, and the correct action creators being passed as the 3rd argument to reducers, and the state passed being the correct namespaced slice to begin with, *components themselves are made available via dependency injection*. In this case directly via state. If it's not loaded, you can display a spinner using suspense:
+
+```js
+  <Suspense>
+    <Route path='/' component='CHECKOUT.ShoppingCart' />
+  </Suspense>
+```
+
+Also note, that within the stripe checkout module, you could leaveout the `CHECKOUT` namepsacing:
+
+```js
+  <Suspense>
+    <Route path='/' component='ShoppingCart' />
+  </Suspense>
+```
+
+
+The following section covering the compile time babel implementation will cover how components can know what module they are part of, which accordingly allows for leaving out parent module namespacing.
+
 
 
 ## Implementation
