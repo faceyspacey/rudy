@@ -65,15 +65,21 @@ We need this capability everywhere we go in Respond:
 
 That means components must access only a slice of state corresponding to their module. The actions made available must only be the ones created out of the routes within the module.
 
-Reducers, as within `combineReducers` already do that, but must also be passed a 3rd argument containing `types`. And of course those `types` most only be the `types` corresponding to the given module.
+Reducers, as within `combineReducers` already do that, but must also be passed a 3rd argument containing `types`:
 
-> aside: passing `types` as a 3rd argument to reducers will be covered in the implemtation section, but basically, this approach allows for *dependency-injection-like* ability to manipulate exactly what `types` are accessible in the reducer, which in our case allows to avoid collisions via namespacing. 
+```js
+const myReducer = (state, action, types) => ...
+```
 
-And last but not least, routes and their paths must not conflict. For example, a 3rd party **Stripe** component may have a route with the path `/payment`--the parent module that includes this must be able to choose what to prefix it with, or possibly even change the path altogether. The route types must also not conflict. Namespacing route action types comes to the rescue there.
+And of course those `types` most only be the `types` corresponding to the given module.
 
-Let's end the big picture section with an example:
+> aside: passing `types` as a 3rd argument to reducers will be covered in the implemtation section, but basically, this approach allows for the *dependency-injection-like* ability to manipulate exactly what `types` are accessible in the reducer, which in our case allows us to avoid collisions via namespacing. 
 
-*`yarn add stripe-cart`*
+And last but not least, routes and their paths must not conflict. For example, when a 3rd party **Stripe** component has a route with the path `/cart`, the parent module that imports this must be able to choose what to prefix it with, or possibly even change the path altogether. The route types must also not conflict. Namespacing route action types comes to the rescue there.
+
+### Example
+
+`$ yarn add stripe-cart`
 
 ```js
 import { createModule } from 'respond-framework'
