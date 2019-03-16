@@ -281,7 +281,7 @@ load: ({ params }) => import(`foo/${params.param}`)
 ```js
 import { createModule } from 'respond-framework'
 
-export default createModule((options) => {
+export default createModule((options) => ({
   routes: {
     OPEN_CART: {
       // path: '/cart',
@@ -299,5 +299,5 @@ export default createModule((options) => {
       path: '/thank-you',
     }
   }
-})
+}))
 ```
