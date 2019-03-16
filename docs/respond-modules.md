@@ -288,16 +288,8 @@ export default createModule((options) => ({
       path: options.openCartPath, // eg: u could choose paths used from the parent module
       thunk: ({ stripe, payload }) => stripe.findCartItems(payload)
     },
-    CHARGE: { // pathless route
-      thunk: async ({ stripe, payload, actions }) => {
-        const { amount } = payload
-        await stripe.charge(amount)
-        return actions.confirmation() // change routes (notice no dispatch necessary)
-      }
-    },
-    CONFIRMATION: {
-      path: '/thank-you',
-    }
+    CHARGE: {},
+    CONFIRMATION: {}
   }
 }))
 ```
