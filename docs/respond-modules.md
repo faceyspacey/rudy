@@ -367,12 +367,58 @@ In one you can easily produce linear/horizontal orchestrations of side-effect ca
 
 ## Implementation
 
-coming soon...
+
+### 1) Statically discover ALL routes + `generate ROUTES_MANIFEST`
+
+In order for any one code split module to link to another module (via actions) we need the bare minimum amount of information to generate all our action creators (hereon known simply as *"actions"*). 
+
+Pre-Respond Rudy had a `createScene` utility function which generates action creators based on your routesMap. 80% of the time it can generate an action creator based on just the `type` string. There are a few edge cases that require a few more pieces of info, but not code like thunk callbacks, and certainly not components and reducers.
+
+Therefore, in order to create all actions an app has, all we have to do is get to the client a minimal `routesMap` containing only the `type` keys + nesting information (i.e. lots of empty objects) like this:
+
+```js
+window.ROUTES_MANIFEST = {
+  HOME: {},
+  CHECKOUT: {
+    load: () => import('modules/checkout'),
+    routes: {
+      STEP1: {},
+      STEP2: {},
+      STEP3: {
+        load: () => import('modules/stripe'),
+        routes: {
+          CHARGE: {},
+          CONFIRMATION: {}
+        }
+      }
+    },
+  }
+}
+```
+
+Based on that we can be on the homepage and dispatch you straight to the confirmation page if we really wanted, eg:
+
+```js
+const HomePage = (props, state, actions) => {
+  return <button onClick={actions.checkout.step3.confirmation} />
+}
+```
+
+The expectation is that all intermediary routes/namespaces will be loaded.
+
+> VERY IMPORTANT THING TO NOTE: routes, when acting as a parent route are doubling as both namespaces (for modules) and nesting
+
+### 2) 
+
+1) Generate ROUTES_MANIFEST
+2) Hashing & Reifying namespace names
+3) De-coupling via Proxies
+4) Nesting vs Namespacing
 
 
 
 
-## Questions
+## Edge Goals
 
 
 - how to deal with dynamic segments in dynamic imports: 
@@ -380,6 +426,57 @@ coming soon...
 load: ({ params }) => import(`foo/${params.param}`)
 ```
 
-- what about loading `routes` that correspond to a single route?
+- **what about loading `routes` that correspond to a single route?**
+
+Firstly, it's important to note we support single reducers or components like this:
+
+```js
+export default createModule({
+  reducers: (state, action, types) => ...,
+  components: (props, state, actions) => <div />,
+})
+```
+
+> we thought of providing a singular version, but rather than document additional keys and wonder what happens if u have both, we decided just type detection (`object` vs `function`) was the way to go. Who cares if the key name is unnecessarily plural some of the time.
+
+So the question, since we have this expected behavior with these 2 important aspects--what about routes? Here are the benefits of a single route module: 
+
+*app.js*
+```js
+export default createApp({
+  routes: {
+    FOO: {
+      path: '/foo',
+      load: () => import('./bar.js')
+    }
+  }
+})
+```
+
+*modules/bar.js*
+```js
+export default createModule({
+  routes: {
+    path: '/bar/:param',
+    thunk: () => ...
+  }
+})
+```
+
+In this example, the idea is that `createModule` doesn't look like this:
 
 
+```js
+export default createModule({
+  routes: {
+    BAR: { // THIS TYPE IS MISSING!
+      path: '/bar',
+      thunk: () => ...
+    }
+  }
+})
+```
+
+Rather, it corresponds to a single route, which allows us to to split a single route and *avoid the sometimes unnecessary de-coupling of namespacing*. 
+
+Notice how the namespace and type is `FOO`, not `FOO/BAR`. The action creator is `actions.foo()`, not `actions.foo.bar()`. 
