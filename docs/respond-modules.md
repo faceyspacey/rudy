@@ -16,13 +16,13 @@ The big picture is this: **names conflict in software.** As seemingly small as t
 
 Not to different from us, those **capabilities** are:
 
-- **async data fetching + side effects**
-- **accessible state stores** (i.e. `context` which circumvents prop drilling)
-- an even more **"functional"** rendering system
+- M: **accessible state stores** (i.e. `context` which circumvents prop drilling)
+- V: an even more **"functional"** rendering system
+- C: **async data fetching + side effects**
 
 > In other words, the modern **MVC** of application development
 
-**Redux lacks this modularity however, and it's a major thorn in the side of large developer teams that want to move fast and achieve their greatest potential.** *When was the last time you saw a React component bound to a redux store on NPM??? Never.*
+**Redux lacks this modularity however. It's a major thorn in the side of large developer teams that want to move fast and achieve their greatest potential.** *When was the last time you saw a React component bound to a redux store on NPM??? Never.*
 
 
 ### Linear Side-Effects Is Best
@@ -113,15 +113,15 @@ Our community has achieved great [success](https://twitter.com/jon_raRaRa/status
 
 ## Redux Built-in to React
 
-Before examine how we solved the problem of *"Redux Modules"*, we must become familiar with how Redux is now built-in to React. Let's check out *Respond's* slightly modified component API:
+Before we examine how we solved the problem of *"Redux Modules"*, we must become familiar with how Redux is now built-in to React. Let's check out *Respond's* slightly modified component API:
 
 ```js
 const RespondComponent = (props, state, actions) => state.open && <Menu toggle={actions.toggle} /> 
 ```
 
-> Yes, Respond components receive 3 args, you never need to bind `dispatch` or `mapStateToProps`, and perf is high
+> Yes, Respond components receive 3 args, you never need to bind `dispatch` or `mapStateToProps`, + perf is excellent
 
-Of course you can still create components the old way, but any time you want access to the state or actions, you know they're right there as additional arguments. In other words, our new component API is an optional *extension* of current component functions and makes no breaking changes. 
+Of course you can still create components the old way, but any time you want access to the state or actions, you know they're right there as additional arguments. In other words, our new component API is an optional *extension* of current component functions and makes no breaking changes. It's implemented via a simple babel plugin that only operates on component functions that utilize a 2nd argument.
 
 In addition, actions are automatially bound to `dispatch` already.
 
@@ -200,26 +200,30 @@ export default createModule({
 
 > Code splitting never requires more work than nesting dynamic imports in your routes map
 
-> Reducers (state), routes (actions + types) *& components* are injected via dependency injection, w/ dynamic loading happening under the hood
+> Reducers (state), routes (actions + types) *and components* are injected via dependency injection, w/ dynamic loading happening under the hood
 
 > It's *Respond's* job to insure dependencies (reducers, routes, and components) are where you need them
 
 > **So all we must do is get Remitano's `routesMap` to look like this, and you get code splitting + SSR for free!**
 
-> Plus you also make it easy for your team to automatically follow best practices for a wide variety of tasks
+> Plus this also makes it easy for your team to automatically follow best practices for a wide variety of tasks
 
 
 ## Respond Framework vs. New React vs. Traditional Redux/Sagas/etc
 
-Much has been said comparing *Respond Framework* to the new hooks/suspense-based React system, even though Remitano has already committed to a global state store Redux-based system. The reason for this is to make your options clear.
+Much has been said comparing *Respond Framework* to the new hooks/suspense-based React system, even though Remitano has already committed to a global state store Redux-based system. The reason for this is to make your options clear, and provide the biggest picture possible.
 
 It would be unwise for any serious 2019 application refactoring not to consider what the React team has put forth. More specifically, my intention is for the Remitano team to see how *Respond Framework* is far superior to both *New React* plus traditional Redux/Sagas-based systems, so you feel you are in the best of hands choosing this approach.
 
 The React team has drawn some serious lines by all the work they have put into their *"component everything"* approach. Any serious React app refactoring in 2019 should take very seriously the new *status quo* approach in comparison to Redux. Essentially the React team--whose leader by the way is the creator of Redux--has made it their goal to rival Redux-based apps with React alone! They want React to be all you need.
 
-Therefore, it's of the utmost importance that the power of the combination of modularity + async pipelines is truly grokked. It's a true game changer.
+Therefore, it's of the utmost importance that the power of the combination of modularity + async pipelines is truly grokked. It's a true game changer for an overly component-obsessed world.
 
-### Some backstory on me and the creation of Respond Framework:
+
+
+
+
+## Some backstory on me and the creation of Respond Framework:
 
 Respond Framework was 80% completed as of last spring 2018. After spending almost a year since the launch of Redux-First-Router making *Respond Framework*, I made the executive decision to put all progress on hold, as the future was uncertain given all the yet-to-be-release hooks/suspense capabilities.
 
@@ -227,11 +231,14 @@ My reasoning in putting a pause on all this hard work is that I spent an entire 
 
 While I grew a ton as a developer building both frameworks (and I always say: **"YOUR MOST IMPORTANT PROJECT IS YOURSELF"**), I couldn't afford a second time for all my time to amount to just personal growth as a developer. I had to be building something that had a high probability of becoming popular and becoming a major avenue to financially thrive.
 
-**So after watching Hooks be released and much of Suspense, I've determined that we are by far the winning solution!** And more importantly that there is in fact a perfect place in the market for this approach/framework (as the refactoring + code-splitting/ssr needs of your system are proof of).
+**So after watching Hooks be released and much of Suspense, it's clear this competing solution doesn't solve the problems my tools solve!** And more importantly that there is in fact a perfect place in the market for this approach/framework (as the refactoring + code-splitting/ssr needs of your system are proof of).
 
-### What about Sagas, Immutable, Redux-Actions and our current Redux system?
 
-As alluded to above, aside from lacking *modularity*, Redux systems lack coherent best practices. More specifically, Redux lacks an API that automatically and naturally leads you into the "pit of success" of best practices. There's endless choices:
+
+
+## What about Sagas, Immutable, Redux-Actions and our current Redux system?
+
+Aside from lacking *modularity*, a secondary problem is there are so many ways to use Redux that it lacks coherent best practices. More specifically, Redux lacks an API that automatically and naturally leads you into the "pit of success" of best practices. There's endless choices:
 
 - sagas vs observables
 - redux-actions, immutable, and other decisions
@@ -244,19 +251,21 @@ It's been several years now of these shenanigans. Most of these tools have stabi
 
 The community has essentially come to **consensus** about several of these tools (my guess is you've heard this from other thought leaders than just me):
 
-- immutable isn't worth it, as the perf gains over native data structures is neglible, and conversions back and forth possibly undo any perf gains anyway
+- immutable isn't worth it, as the perf gains over native data structures is neglible, and conversions back and forth possibly undo any perf gains anyway; it's best to master + standardize usage of built-in data structures than to memorize yet another API surface
 - redux-actions results in less flexible reducers; standard reducer functions let you listen to more actions more easily (aka "less actions, fat reducers" approach); the additional API surface isn't worth it
 - routing coupled to your state store (rather than plugins to connect to React Router) eliminates a plethora of problems described in my initial Redux-First-Router aticles from 2 years ago
-- the verdict about Sagas is that thunks are simpler 80-100% of the time, depending on your application's needs; therefore, only use Sagas when suited towards specific problems that they are a better primitive for (e.g: autocomplete, complex login flows, fast streaming information); and often Observables are in fact better primitives for these precise problems
+- the verdict about Sagas is that simpler thunks are all that's required 80-100% of the time, depending on your application's needs; therefore, only use Sagas when suited towards specific problems that they are a better primitive for (e.g: autocomplete, complex login flows, fast streaming information); and often Observables are in fact better primitives for these precise problems; and again many apps were using Sagas when they didn't need to
 
-*Respond Framework* is designed so that you can use thunks, sagas, observables (and even Apollo/GraphQL) ***all together!*** You must just install the appropriate middleware. In other words, the days of Redux-First-Router only supporting thunks is over. That's not to say all these middlewares are built yet, but it's refreshingly easy to add them. 
+*Respond Framework* is designed so that you can use thunks, sagas, observables (and even Apollo/GraphQL) ***all together!*** You must just install the appropriate middleware. 
+
+In other words, the weakness of *Redux-First-Router* is that the level of customization of route side effects was very minimal (pretty much limited to a thunk). Respond provides complete customizeability via its own asyncronous koa-based middleware API, which unlocks potential for route sagas, observables, graphql and more. That's not to say all these middlewares are built yet, but it's refreshingly easy to add them. 
 
 That said, 80% to possibly 100% of Remitano's sagas are the kind of async data fetching work that better belongs in thunks (as per the above consensus/verdict).
 
-If there's an area in your app where we truly need Sagas, I'll cook up the middleware. If it makes sense as part of our **incremental adoption** strategy, I'll cook it up *sooner*. I'm confident there's plenty of work to do in moving sagas into route thunks. More importantly, it will greatly simplify the codebase.
+If there's an area in your app where we truly need Sagas, I'll cook up the middleware. I'm confident there's plenty of work to do in moving sagas into route thunks. More importantly, it will greatly simplify the codebase. And if it makes sense as part of our **incremental adoption** strategy, I'll cook up the middleware *sooner*.
 
 
-### "Less Actions, Fat Reducers" -- 2 actions per route transition, no more
+## "Less Actions, Fat Reducers" -- 2 actions per route transition, no more
 
 This is akin to the mantra, "thin controllers, fat models" from the Rails MVC world. 
 
@@ -290,24 +299,34 @@ This is very much like a controller in Rails that must do all its work and rende
 
 > on the server, there is only one rendering (with both actions dispatched before the render); more info below...
 
-However, in your app, a typical mistake is being made: actions are being used as setters, and a million actions are being dispatched during what is conceptually a single route change. You might as well be using a mutable store instead of Redux. It's taking things back to the jQuery days, and missing great opportunities for predictability and increased perf.
+However, in your app, a typical mistake is being made: actions are being used as setters, and a million actions are being dispatched during what is conceptually a single route change. Your devtools must be unusable (far too many actions to track). You might as well be using a mutable store instead of Redux. It's taking things back to the jQuery days, and missing great opportunities for predictability and increased perf.
 
-Don't worry, you are not the only one. I spent 2017 as a code mentor working for many companies, and I've seen this everywhere. Basically, if you aren't using Redux-First-Router (or working very hard to make React Router conform to a similar approach), you will end up here. It's hard to extend your app from this place.
+Don't worry, you are not the only one. I spent 2017 as a code mentor working for many companies, and I've seen this everywhere. I've successfully taken companies out of this mess many times. 
 
-### How Could So Many Developers + Thought Leaders Get This All Wrong??
+Basically, if you aren't using Redux-First-Router (or working very hard to make React Router conform to a similar approach), you will end up here. It's hard to extend your app from this place, which is why we must go to the *root* and refactor this before you can move at the pace you dream of.
+
+
+
+
+## How Could So Many Developers + Thought Leaders Get This All Wrong??
 
 First of all, by now many have figured out similar practices. Most are busy just using them. But there's a vocal majority of people lacking in the appropriate experience.
 
-The React/Redux community isn't too be trusted--because they are torn between taking Redux to its logical conclusion (which looks like the RFR approach) vs. trying to look like standard React. If you follow mainstream approaches, you were using `componentDidMount` and `componentWillReceiveProps` to do data-fetching. And then on top of that you are dispatching multiple actions. Hooks, though simpler, is no different.
+The React/Redux community isn't too be trusted--because they are torn between taking Redux to its logical conclusion (which looks like the RFR approach) vs. trying to look like standard React. Teachers across the web are more concerned with teaching learners who just want to learn New React. Redux is being forgotten at an alarming pace.
+
+If you follow mainstream approaches, you were using `componentDidMount` and `componentWillReceiveProps` to do data-fetching. And then on top of that you are dispatching multiple actions. Hooks, though simpler, is no different.
 
 **This doesn't work for SSR because you are never sure when all the necessary actions have done their work, and you have all the data you need to render. You need to be sure you have all the data you need in as few a number of actions as possible. You need to at least be sure of the final action, after which the component tree is ready for rendering.** 
 
-Many double render solutions were invented to combat this. So you had to either follow such a system, or you do something far simpler--follow a 1-2 dispatch approach like in RFR:
+Many double render solutions were invented to combat this. So you had to either follow such a--usually convoluted--system, or you do something far simpler: follow a 1-2 dispatch approach like in RFR:
 
-- first action to trigger the route location change state
-- a possible second action when all the data fetching is complete
+- 1) first action to trigger the route location change state
+- 2) a possible second action when all the data fetching is complete
 
 The `routesMap` makes this simple, and you can do all this based on `req.url` on the server, and then render a single time based on the state of the store. **It's the epitome of simple, logical and natural.** 
+
+
+## SSR
 
 Here's what SSR looks like:
 
@@ -317,7 +336,7 @@ import { createApp } from 'respond-framework'
 import reducer from './reducer'
 
 export default async function configureStore(req) {
-  const routesMap = {
+  const routes = {
     HOME: '/',
     ENTITY: { 
       path: '/entity/:slug',
@@ -394,7 +413,7 @@ The sad thing is if they did understand what was required for SSR, **they would 
 
 
 
-### NEXT: Combination SSR + Splitting
+## NEXT: Combination SSR + Splitting
 
 The combination of SSR + Splitting presents an even greater problem. Whereas splitting in an SPA is not as challenging, once combined with SSR, you're typically in a world of hurt (especially if you aren't using a single pass global state store approach as prescribed by RFR).
 
@@ -415,26 +434,25 @@ Also note, the ideal way to use our `<Route />` component is more like this:
 > in other words, don't couple your app to paths you may wanna change, but rather to action types
 
 
-Lastly, you're probably wondering where `MODULE_NAME` came from, which takes us to the next section...
+Lastly, you're probably wondering where `MODULE_NAME` came from--we will be covering that below when I describe how *Respond Modules* work. Keep this in the back of your mind.
 
 
+## My SSR/Splitting Experience
 
-## Respond Modules Implementation
+Nobody has more experience in this area than me. I wrote the book. I cracked the code. I brought combination SSR + Splitting mainstream, and did so for a Redux-centric world.
 
-Having come this far, it's now time to see how *"Respond Modules"* actually work. 
+As for the React team, you can check for yourself, Dan Abramov, I quote:
 
-
-### My Experience
-
-Nobody has more experience in this area than me. I wrote the book. I cracked the code. I try my best not to be arrogant, and just state the facts. This is fact. 
-
-As for the React team, you can check for yourself, Dan Abramov, I quote, has "never talked from Node to a database and [doesn't] really know how to a write backend in it": 
+> "has never talked from Node to a database and [doesn't] really know how to a write backend in it": 
 
 https://overreacted.io/things-i-dont-know-as-of-2018/
 
 endquote
 
-In essence, the thought leaders--and he's not the only one--don't know enough when it comes to building full stack apps. And based on their solutions and what they choose to focus on, clearly aren't including these needs in what they're building. 
+**In other words, he's never done SSR.**
+
+
+In essence, prominent thought leaders--and he's not the only one--lack experience when it comes to building full stack apps. They do great things, but their experience and focus is narrow. And based on their solutions and what they choose to focus on, they clearly aren't including these needs in what they're building. 
 
 Here's another core React team member at Facebook who recently tweeted:
 
@@ -446,24 +464,29 @@ Just wish I had fully appreciated the problem a little sooner.
 https://twitter.com/sophiebits/status/1097732632840826880
 
 
-The React team doesn't know fetching in real/typical apps. They know Facebook which is far from typical and doesn't need SSR, and not to mention has hundreds of engineers able to solve the unique idiosyncracies of their app. In other words, however they're using React likely looks way different than the rest of us.
+The React team doesn't know fetching in real/typical apps. They know Facebook which is far from typical and doesn't need SSR, and not to mention has hundreds of engineers able to solve the unique idiosyncracies of their app. *In other words, however they're using React likely looks way different than how the rest of us use it.*
 
-What the React team comes up with seems to fit whatever those needs are plus target the needs of learners. The React team is out of touch with the needs of small teams (1-10 developers) that are responsible for building and extending entire apps soup to nuts in a short amount of time. Aka startups like Remitano 
+What the React team comes up with seems to fit whatever those needs are *plus the needs of learners*. Every example they produce is simple. They have never publicly produced an example of a medium-to-large-sized app. My only conclusion can be that the React team is out of touch with the needs of small teams (1-10 developers) that are responsible for building and extending entire apps soup to nuts in a short amount of time. Aka startups like Remitano.
 
-#opinions #faceyspacey #respond-framework #2016-2019
+#opinions #faceyspacey #respond-framework #rant #2016-2019
 
 
-### Back to your Redux usage
+## Back to your Redux usage
 
-Using the *Respond* system relies first and foremost on re-imagining your sagas as a far smaller number of thunks. It relies on getting all the data you need in a single thunk attached to a route, with the result being only 2 actions dispatched. Designing your app this way flows downstream toward writing ****"fatter reducers"***. Essentially, your reducers must become smarter and each listen to a greater number of actions. Finally, you must remove lots of unnecessary state/reducers that are holding redundant information.
+Using the *Respond* system relies first and foremost on re-imagining your sagas as a far smaller number of thunks. It relies on getting all the data you need in a single thunk attached to a route, with the result being ideally 2 actions dispatched (which as you can see, don't even require being *dispatched*, only returned). 
 
-Right now an action is dispatched from the UI, which is listened to by a Saga, which then dispatches setter actions. The initial saga didn't even do anything. It should at least be responsible for a route change. What really should have happened is a route change action was dispatched, and then the route's paired thunk does dispatches all the data (and possibly other information needed) in a single follow-up dispatch.
+Designing your app this way flows downstream toward writing ***"fatter reducers"***. Essentially, your reducers must become smarter and each listen to a greater number of actions. Finally, you must remove lots of unnecessary state/reducers that are holding redundant information.
 
-Sagas often end up this kind of listener soup, and it's unnecessary, and makes apps very hard to reason about. 
+Right now an action is dispatched from the UI, which is listened to by a Saga, which then dispatches many setter actions. The initial saga often doesn't even do anything. It should at least be responsible for a route change. What really should have happened is a route change action was dispatched, and then the route's thunk dispatches all the data (and possibly other information needed) in a single follow-up dispatch.
+
+Sagas often end up this kind of listener soup, and it's unnecessary (I call it "saga soup"). It makes apps very hard to reason about. 
 
 Lastly, the pattern of using a global `_store` object doesn't work--because SSR requires a unique `store` instance per request. The store must be passed down **through context only** to insure this. In addition, such globals make testing a problem.
 
-### Simple Testing is the Holy Grail of Redux Apps
+None of this is rocket science. After your developer team sees me do it for one area (HOMEPAGE + LOGIN), they will quickly grasp it.
+
+
+## Near-Fully-Automatic Testing is the Holy Grail of Redux Apps
 
 
 Here's how testing is supposed to look like:
@@ -497,95 +520,61 @@ Because `await store.dispatch(action)` guarantees all work is done in this singl
 This is **the Respond way**. 
 
 
+You can even make tests look this terse:
+
+*__ tests __/foo.js:*
+
+```js
+import { createApp } from 'respond-framework'
+import snapTests from '../__test-helpers__'
+import { routes, actions } from '../__test-sequences__/foo'
+
+describe('render something', async () => {
+  await snapTests(routes, actions)
+})
+```
+
+
+## Devtools
+
+Because *New React* relies on essentially multiple stores spread throughout your component tree, it's not only impossible to drive a test generator as above, it's also impossible to get a birds-eye view of your app.
+
+*Respond Modules's* secret sauce is that they use the same store, but inside a module feel like their own store. This is done by compile-time namespacing. That means you can see the state of all modules/namespaces from the standard Redux devtools! No new devtool solutions must be created (though in the future we plan to improve upon the Redux Devtools).
+
+> FYI: the first feature we plan to add to the Redux Devtools is one that generates the above test using the current actions in the devtools! You can almost do something similar currently with its templates feature, but we plan to make it so automatic that it updates the test file in your filesystem. It's basically just a dump of the actions in the devtools, paired with a test runner like `snapTests`.
 
 
 
-## The Next Level of The Stack
+## NO ACTION CREATORS
 
-Now that we've made clear our best of both worlds approach (modularity + linear side-effects), let's get a stronger feeling for how **Respond Framework is a required evolution to the application development stack**.
+If it's not been obvious, in *Respond* you don't create action creators. They are automatically created for you out of your routesMap!
 
-Application development is like a *building*. Each floor/level contributes something necessary to rise higher and higher, with the foundation being the most important part of the stack. 
+Eg:
 
-The foundation of a large building is made up of several floors on the bottom devoted to very important things like power, fuel, garbage collection, maintenance, mail room, etc. And that's not to mention, the metal must be firmly secured.
+```js
+const routes = {
+  HOME: '/',
+  POSTS: {
+    path: '/posts',
+    thunk: ({ api }) => api.fetchPosts()
+  }
+}
+```
 
-On top of a solid enough foundation, however, can be built many times more floors (where the builders attain the value they seek). The sky is the limit for these builders (Remitano). 
+will result in the corresponding action creator automatically injected in to components:
 
-Modern application development stack with **Respond Framework** looks like this:
+```js
+const RespondComponent = (props, state, actions) => <button onClick={actions.home}>HOME</button>
+```
 
-- your app
-- your app
-- your app
-- your app
-- your app
-- your app
-- your app
-- your app
-- controller/route/side-effects management (redux-first-router or Respond Framework)
-- model/state management (redux or Respond Framework)
-- view rendering library (react, or ***slightly*** modified namespaced Respond Components)
-- javascript (+ browser/node APIs)
-- C++ 
-- assembly
-- CPUs + memory
-
-Each level of the stack has a unique capability it introduces, usually in the form of--if done correctly--a small number of ***primitives.*** The smaller the number, and the better suited for the given task, the more powerful the abstraction. 
-
-> Everyone in the open source software industry is in search of the perfect primitive to simplify software development.
-
-**1) The React level of the stack** offers the ***"component"*** primitive--and we have already covered it's weaknesses.
-
-**2) The Redux level of the stack** offers its own primitive: the *reactive subscription-based state store* object. Its primary weakness however is that ***it's not modular.*** Here are the reasons why:
-
-- "Redux Component Modules" do not exist on NPM that you can use in your project conflict-free
-- it's impossible to guarantee that an NPM component using redux accessing `state.posts` does not already exist
-- it's impossible to namespace state keys
-- it's impossible to parameterize state keys so they can be defined in userland
-- building parts of an app together across team members--if not using NPM--inherit all these problems, and **require far more coordination than is necessary**
-
-In essence, if you're building a Redux app, don't expect it to be easy to have one team go off and build one part, and another team another part, and so on, and expect it to all glue together nicely *without lots of otherwise unecessary planning/coordination.* 
-
-Conversely, if it was a breeze, tremendous developer productivity would be unlocked.
-
-> A secondary problem with Redux is that there are so many ways to use Redux that it's very hard to fall into the "pit of success" like you can do with Rails, which makes more obvious a set of best practices. Currently Remitano suffers from many of these ***Redux pitfalls***, which we will be discussing later on (as right now, we are covering only *unavoidable weaknesses in current technologies*). One hint though is: *just take a look at the above routesMap with thunks/sagas/loadCodeSplitting/nestedRoutes/etc--this very much narrows the best practices to utilize.*
-
-**3) The Redux-First-Router level of the stack** offers the ***"route"***--which is not too different from a *controller*--as its primitive. Routes facilitate the precise timing of the execution of effects. The weakness of Redux-First-Router is that the level of customization of route side effects was very minimal (pretty much limited to a thunk). *Respond* provides complete customizeability via its own asyncronous koa-based middleware API.
+Then there is also: `actions.posts.complete()` which is automatically generated, and several others.
 
 
-## Respond, An Opinionated System
-
-**The Respond Framework** couples the job of the last 3 levels of the stack (particularly the last 2) into an **opinionated system** where:
-
-- best practices are obvious
-- horizontal/linear route execution between component tree re-renderings is extremely customizeable ***(and I mean extremely customizeable; this is the unsung hero of the Respond approach)***
-- where "Redux Component Modules" don't just exist, but are *how you build individual parts of your app*
-- test writing can be 99% completely automated via simple arrays of `actions`
-- where routing is as important of a concern as state management + rendering (examples of advanced things Respond can do: maintain history entries array in state, effects caching, route middleware API)
-- state store access is built-in to components
-- **code-splitting + SSR is built-in + automatic**
-
-
-The alternative--component tree design--results in arbitrarily placed, potentially conflicting "effects." Coordination and orchestration is completely lacking in this design, notwithstanding that reverse propagation boundary solutions like `<Suspense>` come to the rescue to some degree. 
-
-> Coming from a Rails system, Remitano should feel right at home with stuffing all effects in routes, as they are akin to *"controllers"* in Rails.
-
-However, as described above, what React's new system does very well is *MODULARITY*. But all is not right in *Reactlandia*. The work necessary to make these "modules" talk to each other is cumbersome, especially as needs evolve. In other words, the cost of modularity is communicating "lifted" state/information/coordination down your component tree, as has always been the problem with standalone React.
-
-The new React system relies on essentially the *multi store* approach using context and things like `useReducer` to propagate small *mini* stores down the component tree when needed. 
-
-The achilles heel of this aspect is that it's both *"mini"* and *"multi"*. 
-
-Because it's *"multi,"* time travelling such systems becomes impossible in reality. Dreams of completely automated testing systems based on arrays of Redux actions go out the window because it's impossible to coordinate across more than one store. 
-
-The fact that each contained microcosm of state is *"mini"* means you're always struggling to get the state you need where you need it as your app expands or as you refactor it (again the "lifting state/fx" slog). And that's not to mention that lifting and drilling results in perf losses, which are very noticeable in the form of jank within heavily animated apps.
-
-Traditionally, single state store systems like Redux on the other hand don't have these problems, but fall short in modularity. When was the last time you saw a set of Redux components + reducers + actions on NPM to snatch up and grab?? *Never.* Those action types and reducer state keys are not guaranteed to be unique. In fact they are pretty much guaranteed to *conflict somewhere with the existing actions of your app.*
-
-So whatever solution that comes to the rescue, it's going to revolve around namespacing those action types and reducer state keys. 
+When using Respond Modules, the actions appear namespaced like this: `actions.moduleName.morePossibleNesting.home()`.
 
 
 
-
-### Characteristics of Modules
+## Characteristics of Respond Modules
 
 We can take a page from the **ES6 Modules** playbook to see what characteristics we seek:
 
@@ -697,7 +686,7 @@ export default createModule({
 import createApp, { Route } from 'respond-framework'
 import stripeModule from 'respond-stripe-cart'
 
-const { store, firstRoute } createApp({
+const { store, firstRoute } = createApp({
   reducer, // previously in Reduxlandia: createStore(reducer, initialState, enhancer)
   initialState
   enhancer,
@@ -777,8 +766,6 @@ The real magic is not just that it has its own state, but these aspects of the i
 - **that descendant components within the same module also are informed of the state slice they have access to, which is due to our babel compilation time implementation that will be described in the next section**
 
 Actions like `actions.checkout.openCart` (which of course correspond to he `OPEN_CART` route and action type) are however available throughout the whole app, in order to facilitate key capabilities like linking between modules!
-
-> currently we're undecided as to whether only higher modules can access actions, or if *all* modules can. Possibly just higher, and lower modules must be passed such actions as props. 
 
 **Lastly**, our module's components are automatically code split via our `<Route />` component:
 
@@ -915,6 +902,8 @@ In one you can easily produce linear/horizontal orchestrations of side-effect ca
 **Respond Framework** merges and reconciles the best of both worlds via a compile-time-generated namespacing system.
 
 
+
+
 ## Implementation
 
 
@@ -922,7 +911,7 @@ In one you can easily produce linear/horizontal orchestrations of side-effect ca
 
 In order for any one code split module to link to another module (via actions) we need the bare minimum amount of information to generate all our action creators (hereon known simply as *"actions"*). 
 
-Pre-Respond Rudy had a `createScene` utility function which generates action creators based on your routesMap. 80% of the time it can generate an action creator based on just the `type` string. There are a few edge cases that require a few more pieces of info, but not code like thunk callbacks, and certainly not components and reducers.
+Initially *Respond* had a `createScene` utility function which generates action creators based on your routesMap. 80% of the time it can generate an action creator based on just the `type` string. There are a few edge cases that require a few more pieces of info, but not code like thunk callbacks, and certainly not components and reducers.
 
 Therefore, in order to create all actions an app has, all we have to do is get to the client a minimal `routesMap` containing only the `type` keys + nesting information (i.e. lots of empty objects) like this:
 
@@ -960,13 +949,15 @@ The expectation is that all intermediary routes/namespaces will be loaded.
 
 As far as implementation, our `codeSplit('load')` middleware will be sure to load *all intermediary* routes in parallel. 
 
-### 1B) The Discovery
 
-Essentially we need to track each `import()` from the top to the bottom. Each dynamically imported module becomes a significant "boundary" we use to assign namespacing. 
+
+### 2) The Discovery
+
+Essentially we need to track each `import()` from the top to the bottom. Each dynamically imported module becomes a significant "boundary" we use to assign namespacing. This information is provided to us by webpack stats.
 
 For example, the `modules/checkout` module will have many components imported into the primary component--they will also be assigned the `CHECKOUT` module. 
 
-Most importantly, at the file location of each dynamic module, we extract the routes statically. The means routes can't be generated statically. They must exist in files like `modules/checkout.js` like this:
+Most importantly, at the file location of each dynamic module, we extract the routes statically. The means routes can't be generated dynamically. They must exist in files like `modules/checkout.js` like this:
 
 ```js
 routes: {
@@ -975,22 +966,18 @@ routes: {
 }
 ```
 
-2) Namespace Assignment to Files
+
+### 3) Namespace Assignment to Files
 
 As mentioned above, descendant components not directly within the module boundary file, need to be assigned the correct module. This is so they are assigned the correct slice of state (and actions) in one of our components, eg:
 
 ```js
-const MyComponent = (props, state, actions) => {
-  return state.isPaid ? <h1>paid</h1> : <h1>unpaid</h1>
-}
-
-
 //INPUT:
 export const MyComponent = (props, state, actions) => {
   return <div>{state.title}</div>
 }
 
-// --> OUTPUT:
+// --> BABEL PLUGIN OUTPUT:
 
 // rename the original component
 const MyComponentOriginal = (props, state, actions) => {
@@ -999,83 +986,14 @@ const MyComponentOriginal = (props, state, actions) => {
 
 // and then simply use it as a function within the template:
 export const MyComponent = (props) => {
-  const state = useReduxState();
-  const dispatch = useReduxDispatch();
+  const { state, actions } = useRespond('__respond__current/file/path')
   return MyComponentOriginal(props, state, actions)
 }
-
-
 ```
 
-### 2) 
+Fortunately, webpack creates different chunk IDs for each chunk, and our system is carefully designed so there is a one-to-one relationship between Webpack chunks and Respond Modules! 
 
-1) Generate ROUTES_MANIFEST
-2) Hashing & Reifying namespace names
-3) De-coupling via Proxies
-4) Nesting vs Namespacing
+Therefore, after all chunks are built, we can performantly figure out the names of modules in a given chunk from webpack stats, and replace those file names (e.g: `'__respond__current/file/path'`) with the given chunkId.
 
 
-
-
-## Edge Goals
-
-
-- how to deal with dynamic segments in dynamic imports: 
-```js
-load: ({ params }) => import(`foo/${params.param}`)
-```
-
-- **what about loading `routes` that correspond to a single route?**
-
-Firstly, it's important to note we support single reducers or components like this:
-
-```js
-export default createModule({
-  reducers: (state, action, types) => ...,
-  components: (props, state, actions) => <div />,
-})
-```
-
-> we thought of providing a singular version, but rather than document additional keys and wonder what happens if u have both, we decided just type detection (`object` vs `function`) was the way to go. Who cares if the key name is unnecessarily plural some of the time.
-
-So the question, since we have this expected behavior with these 2 important aspects--what about routes? Here are the benefits of a single route module: 
-
-*app.js*
-```js
-export default createApp({
-  routes: {
-    FOO: {
-      path: '/foo',
-      load: () => import('./bar.js')
-    }
-  }
-})
-```
-
-*modules/bar.js*
-```js
-export default createModule({
-  routes: {
-    path: '/bar/:param',
-    thunk: () => ...
-  }
-})
-```
-
-In this example, the idea is that `createModule` doesn't look like this:
-
-
-```js
-export default createModule({
-  routes: {
-    BAR: { // THIS TYPE IS MISSING!
-      path: '/bar',
-      thunk: () => ...
-    }
-  }
-})
-```
-
-Rather, it corresponds to a single route, which allows us to to split a single route and *avoid the sometimes unnecessary de-coupling of namespacing*. 
-
-Notice how the namespace and type is `FOO`, not `FOO/BAR`. The action creator is `actions.foo()`, not `actions.foo.bar()`. 
+## More Implementation Coming soon...
