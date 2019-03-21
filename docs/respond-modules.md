@@ -2,7 +2,7 @@
 
 The following is an explanation of the *big picture* problems solved by **Respond Framework** plus a description of key parts of our *implementation*.
 
-![Respond Framework Homepage](./respondhomepage.png)
+![Respond Framework Homepage](https://raw.githubusercontent.com/faceyspacey/rudy/master/docs/respondhomepage.png)
 
 
 ## Big Picture (MODULARITY + LINEAR SIDE-EFFECTS MANAGEMENT)
@@ -598,7 +598,84 @@ export const MyComponentB = (props, state, actions) => {}
 
 The defining part you're looking at is `as Component`. In other words, the ability for parent modules to alias names from the child module is the crux of avoiding name collision in a module system.
 
-We need this capability everywhere we go in *Respond*:
+In *Respond*, these namespace aliases can only be known once all modules of the app are known. Until then (e.g. if a module is sitting on NPM), its namespace is essentially anonynmous. 
+
+### Example:
+
+*src/modules/home.js:*
+```js
+import { createModule } from 'respond-framework'
+
+export default createModule({
+  components: {
+    Menu: (props, state, actions) => {
+      const { visible } = state
+      const { home, login } = actions
+
+      return (
+        <div>
+          {visible && <ChildComponent go={home} redirect={login} />}
+        </div>
+      )
+    }
+  },
+  reducers: {
+    visible: (state = false, action, types) => {
+      return action.type === types.HOME ? !state : state
+    },
+    user: (state = false, action, types) => {
+      return action.type === types.LOGIN_COMPLETE ? true : state
+    },
+  },
+  routes: {
+    HOME: {
+      path: '/',
+      thunk: ({ getState, actions }) => {
+        if (!getState().user) return actions.login()
+      }
+    },
+    LOGIN: '/login'
+  }
+})
+```
+
+*src/app.js:*
+```js
+import { createApp } from 'respond-framework'
+
+export default createModule({
+  routes: {
+    MAIN_NAMESPACE_ALIAS: {
+      path: '/prefix',
+      load: () => import('modules/home.js')
+    }
+  }
+, options, middleware)
+```
+
+So in this example, the actions under the hood are actually:
+
+- `actions.mainNamespaceAlias.home()`
+- `actions.mainNamespaceAlias.login()`
+- `actions.mainNamespaceAlias.login.complete()`
+
+State is actually:
+
+- `state.mainNamespaceAlias.visible`
+- `state.mainNamespaceAlias.user`
+
+The types passed to the reudcer are actually: 
+
+- `types.MAIN_NAMESPACE_ALIAS.HOME`
+
+And the callback assigned to the route accesses:
+- `state.mainNamespaceAlias.user`
+- `actions.mainNamespaceAlias.login()`
+
+
+> The take away is that the parent module determines the namespace used. At build time, each module pertains to a single webpack chunk. In other words, there is guaranteed to be a *one-to-one relationship between webpack chunks and Respond modules.* It's then given the `chunkId` as it's namespace. Then only once all modules are known (i.e. after ALL chunks are built), are the `chunkIds` replaced with user assigned aliases. This assignment is done via the *Respond* webpack plugin.
+
+### We need this capability everywhere we go in *Respond*:
 
 - **COMPONENTS:** actions + state keys passed to components
 - **REDUCERS:** action types passed to reducers
