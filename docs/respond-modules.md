@@ -24,14 +24,14 @@ Not to different from us, those **capabilities** are:
 
 > In other words, the modern **MVC** of application development
 
-**Redux lacks this modularity however. It's a major thorn in the side of large developer teams that want to move fast and achieve their greatest potential.** *When was the last time you saw a React component bound to a redux store on NPM??? Never.*
+**Redux lacks this modularity however. It's a major thorn in the side of large developer teams that want to move fast and achieve their greatest potential.** *When was the last time you saw a React component bound to a Redux store on NPM??? Never.*
 
 
 ### Linear Side-Effects Is Best
 
 The flip side is that even though plain React is modular, its approach lacks linear side-effects management. *Why is this a major problem?*
 
-**The achilles heel of the component-obsessed approach (yes, with Hooks/Suspense too) is that side-effects are better known prior to rendering, rather than randomly discovered during component tree traversal.** The resulting order can be random and impossible to coordinate predictably. You often are wondering/debugging "where is xyz happening?" Worse, these are **surprises**. 
+**The achilles heel of the component-obsessed approach (yes, with Hooks/Suspense too) is that side-effects are better known prior to rendering, rather than randomly discovered during component tree traversal.** The resulting order can be random and impossible to coordinate predictably. You often are wondering/debugging "where is xyz happening?" SSR + code splitting becomes incredibly difficult. Worse, these are **surprises**. 
 
 > ["No surprises == better sleep"](https://twitter.com/faceyspacey/status/1107057805507227649) -Anton Korzunov (maintainer of React-Hot-Loader, react-imported-component)
 
@@ -57,8 +57,10 @@ const routes = {
     saga: function* () {}, // a saga middleware can also easily be added
     onEnter: () => ...,
     routes: { // nested routes now supported
-      SETTINGS: '/settings',
-      load: () => import('modules/settings') // modules are automatically code-split
+      SETTINGS: {
+        path: '/settings',
+        load: load: () => import('modules/settings') // modules are automatically code-split
+      }
     }
   }
 }
@@ -66,13 +68,14 @@ const routes = {
 const options = {
   reducer: reduxReducer,
   enhancer: reduxEnhancer, // standard syncronous Redux middleware API is in here
-  beforeEnter: ({ getState, params, query, hash, basename, muchMore }) => { // best URL transformation
+  beforeEnter: ({ getState, params, query, hash, basename, muchMore }) => { // better URL transformation
     if (params.userId && !getState().user) {
       return { type: 'LOGIN' } // redirects automatically applied
     }
   }
 }
 
+// default middleware (i.e. you can optionally provide a customized array)
 const middlewares = [ // these async middlewares are guaranteed to each run sequentially
   codeSplit('load'),
   transformAction,    
@@ -193,7 +196,8 @@ export default createModule({
 *elsewhere:*
 ```js
 // component dynamically loaded (aka code split) and injected via DI
-<Route path='/dashboard' component='MODULE_NAME.RespondComponent' /> // notice the component is a string
+const { RespondComponent } = state.location.components.moduleName
+<Route path='/dashboard' component={RespondComponent} fallback={Spinner} />
 
 // we will describe how "moduleName" is assigned below (hint: think ES6 modules + aliasing by parent)
 <button onClick={actions.moduleName.dashboard}>GO TO DASHBOARD</button>
@@ -219,7 +223,7 @@ It would be unwise for any serious 2019 application refactoring not to consider 
 
 The React team has drawn some serious lines by all the work they have put into their *"component everything"* approach. Any serious React app refactoring in 2019 should take very seriously the new *status quo* approach in comparison to Redux. Essentially the React team--whose leader by the way is the creator of Redux--has made it their goal to rival Redux-based apps with React alone! They want React to be all you need.
 
-Therefore, it's of the utmost importance that the power of the combination of modularity + async pipelines is truly grokked. It's a true game changer for an overly component-obsessed world.
+Therefore, it's of the utmost importance that the power of the combination of modularity + async pipelines is truly grokked. It's a true game changer for an overly component-obsessed world. Welcome to the world of the new dominant primitive: **Respond Modules**.
 
 
 
@@ -233,7 +237,7 @@ My reasoning in putting a pause on all this hard work is that I spent an entire 
 
 While I grew a ton as a developer building both frameworks (and I always say: **"YOUR MOST IMPORTANT PROJECT IS YOURSELF"**), I couldn't afford a second time for all my time to amount to just personal growth as a developer. I had to be building something that had a high probability of becoming popular and becoming a major avenue to financially thrive.
 
-**So after watching Hooks be released and much of Suspense, it's clear this competing solution doesn't solve the problems my tools solve!** And more importantly that there is in fact a perfect place in the market for this approach/framework (as the refactoring + code-splitting/ssr needs of your system are proof of).
+**So after watching Hooks be released and much of Suspense, it's clear this competing solution doesn't solve the problems these tools solve!** And more importantly that there is in fact a perfect place in the market for this approach/framework (as the refactoring + code-splitting/ssr needs of your system are proof of).
 
 
 
@@ -314,7 +318,7 @@ Basically, if you aren't using Redux-First-Router (or working very hard to make 
 
 First of all, by now many have figured out similar practices. Most are busy just using them. But there's a vocal majority of people lacking in the appropriate experience.
 
-The React/Redux community isn't too be trusted--because they are torn between taking Redux to its logical conclusion (which looks like the RFR approach) vs. trying to look like standard React. Teachers across the web are more concerned with teaching learners who just want to learn New React. Redux is being forgotten at an alarming pace.
+The React/Redux community isn't too be blindly followed--because they are torn between taking Redux to its logical conclusion (which looks like the RFR approach) vs. trying to look like standard React. Teachers across the web are more concerned with teaching learners who just want to learn New React. Redux is being forgotten at an alarming pace.
 
 If you follow mainstream approaches, you were using `componentDidMount` and `componentWillReceiveProps` to do data-fetching. And then on top of that you are dispatching multiple actions. Hooks, though simpler, is no different.
 
@@ -375,13 +379,19 @@ export default async function serverRender(req, res) {
   const appString = ReactDOM.renderToString(<Provider store={store}><App /></Provider>)
   const stateJson = JSON.stringify(store.getState())
 
+  const scripts = store.getState().location.chunks.map(script => {
+    return `<script src="/static/${script}" />`
+  }).join(' ')
+
   return res.send(
     `<!doctype html>
       <html>
         <body>
           <div id="root">${appString}</div>
           <script>window.RESPOND_STATE = ${stateJson}</script>
+          <script src="/static/bootstrap.js" />
           <script src="/static/main.js" />
+          ${scripts}
         </body>
       </html>`
   )
@@ -421,23 +431,30 @@ The combination of SSR + Splitting presents an even greater problem. Whereas spl
 
 In the RFR days, we still did splitting at the component level with [react-universal-component](https://github.com/faceyspacey/react-universal-component). In essence, we were split across 2 worlds (i.e. not an ideal place to be).
 
-*Respond* solves this with *dependency injection*--which is just a fancy way of saying we store components in state, and display a loading.. animation when a route path is matched, but the corresponding component doesn't exist yet in state:
+It's now even easier with *Respond* because we can determine all chunks/scripts to send in the initial page load directly from your `routesMap`! Before, chunks had to be flushed after component tree rendering. 
+
+Getting components into the component tree is solved via *dependency injection*--which is just a fancy way of saying we store components in state, and display a *loading..* animation when a route path is matched, but the corresponding component doesn't exist yet in state:
 
 ```js
-<Route path='/dashboard' component='MODULE_NAME.RespondComponent' /> 
+<Route path='/dashboard' component={moduleName.RespondComponent} /> 
 ```
 
 Also note, the ideal way to use our `<Route />` component is more like this:
 
 ```js
-<Route type='MODULE_NAME.DASHBOARD' component='MODULE_NAME.RespondComponent' /> 
+<Route type={types.moduleName.DASHBOARD} component={moduleName.RespondComponent} /> 
 ```
 
 > in other words, don't couple your app to paths you may wanna change, but rather to action types
 
 
-Lastly, you're probably wondering where `MODULE_NAME` came from--we will be covering that below when I describe how *Respond Modules* work. Keep this in the back of your mind.
+Also, you're probably wondering where `MODULE_NAME` came from--we will be covering that below when I describe how *Respond Modules* work. Keep this in the back of your mind.
 
+Lastly, to determine initial chunks/chunks to send from the server on initial render, they are all kept in our location reducer state at:
+
+```js
+store.getState().location.chunks
+```
 
 ## My SSR/Splitting Experience
 
@@ -578,6 +595,33 @@ Then there is also: `actions.posts.complete()`and `actions.posts.error()` which 
 When using Respond Modules, the actions appear namespaced like this: `actions.moduleName.morePossibleNesting.home()`.
 
 
+## Selectors
+
+Selectors in *Respond* are created at the time of store creation. They are also powered by advanced proxy-based usage tracking in order to perform optimized + automatic caching/memoization:
+
+```js
+createModule({
+  selectors: {
+    item: (state, props) => state.itemsCache[props.id]
+  }
+})
+```
+
+Since, they are not supplied as part of `mapStateToProps`, their usage is a bit different. Within a component, you will pass arguments to your selectors, such as a `props` arg:
+
+
+```js
+const RespondComponent = (props, state, actions) => state.item(props) && <Foo /> 
+```
+
+> Notice that the `state` argument is automatically passed. It's your job to pass the 2nd+ arguments
+
+
+It's pretty straightforward. The cool/efficient part from a DX standpoint is that you can think of selectors similarly to reducer states--they both exist on the same object, except reducers are properties and selectors are methods. 
+
+But yes, `mapStateToProps` is dead. In a world where memoization is automatic based on tracking object access, there is a new more natural interface: *simply calling selectors within component functions.*
+
+
 
 ## Characteristics of Respond Modules
 
@@ -596,11 +640,25 @@ export const MyComponentB = (props, state, actions) => {}
 ```
 
 
-The defining part you're looking at is `as Component`. In other words, the ability for parent modules to alias names from the child module is the crux of avoiding name collision in a module system.
+The defining part you're looking at is `as Component`. In other words, the ability for parent modules to alias names from the child module is the crux of avoiding name collision in a module system. AKA ***namespacing***.
 
-In *Respond*, these namespace aliases can only be known once all modules of the app are known. Until then (e.g. if a module is sitting on NPM), its namespace is essentially anonynmous. 
+In *Respond*, these namespaces can only be known once all modules of the app are known. Until then (e.g. if a module is sitting on NPM), its namespace is essentially anonynmous. 
 
 ### Example:
+
+*src/app.js:*
+```js
+import { createApp } from 'respond-framework'
+
+export default createApp({
+  routes: {
+    MAIN_NAMESPACE_ALIAS: {
+      path: '/prefix',
+      load: () => import('./modules/home.js')
+    }
+  }
+}, options, middleware)
+```
 
 *src/modules/home.js:*
 ```js
@@ -629,7 +687,7 @@ export default createModule({
   },
   routes: {
     HOME: {
-      path: '/',
+      path: '/home',
       thunk: ({ getState, actions }) => {
         if (!getState().user) return actions.login()
       }
@@ -639,103 +697,108 @@ export default createModule({
 })
 ```
 
-*src/app.js:*
-```js
-import { createApp } from 'respond-framework'
 
-export default createModule({
-  routes: {
-    MAIN_NAMESPACE_ALIAS: {
-      path: '/prefix',
-      load: () => import('modules/home.js')
-    }
-  }
-, options, middleware)
-```
 
-So in this example, the actions under the hood are actually:
+So in this example, the **actions** under the hood are actually:
 
 - `actions.mainNamespaceAlias.home()`
 - `actions.mainNamespaceAlias.login()`
 - `actions.mainNamespaceAlias.login.complete()`
 
-State is actually:
+The **state** is actually:
 
 - `state.mainNamespaceAlias.visible`
 - `state.mainNamespaceAlias.user`
 
-The types passed to the reudcer are actually: 
+The **types** passed to the reudcer are actually: 
 
 - `types.MAIN_NAMESPACE_ALIAS.HOME`
 
-And the callback assigned to the route accesses:
+And the **route callback** accesses:
 - `state.mainNamespaceAlias.user`
 - `actions.mainNamespaceAlias.login()`
 
-
-> The take away is that the parent module determines the namespace used. At build time, each module pertains to a single webpack chunk. In other words, there is guaranteed to be a *one-to-one relationship between webpack chunks and Respond modules.* It's then given the `chunkId` as it's namespace. Then only once all modules are known (i.e. after ALL chunks are built), are the `chunkIds` replaced with user assigned aliases. This assignment is done via the *Respond* webpack plugin.
-
-### We need this capability everywhere we go in *Respond*:
-
-- **COMPONENTS:** actions + state keys passed to components
-- **REDUCERS:** action types passed to reducers
-- **ROUTES:** the state keys + action creators passed to route callbacks
+And **paths** are optionally prefixed to:
+- `/prefix/home`
+- `/prefix/login`
 
 
-1) That means **components** must access only a slice of state corresponding to their module. The actions made available must only be the ones created out of the routes within the module.
+> The take away is that the parent module determines the namespace used. 
 
 
-For example in:
+## Route Nesting, Splitting, Callbacks in Modules
 
-```js
-export const MyComponentB = (props, state, actions) => {}
-```
+*Respond's* "modules" feature actually **collapses** several capabilities into *one* interface that looks like nested routes. Altogether, those capabilities are:
 
-`state` is actually `state.someModule` and `actions` is actually `actions.someModule`, but within a component from a given module, this is "transparent." A proxy for each object is used which is smart enough to tap into the correct namespace.
+- namespacing
+- code splitting
+- path nesting (more on this below..)
+- callback nesting (more on this below..)
 
+So we have already described namespacing in depth. In summary, the route `type` of the parent becomes the namespace for child routes. That's the core feature of *Respond modules*. 
 
-2) Similarly, **reducers** must be passed a 3rd argument containing `types`:
+Next: code splitting is obvious enough: *modules occur at the boundaries where chunks are split*. In other words, code splitting + modules go hand in hand--the first step to namespacing a module is dynamically importing it with `import()`.
 
-```js
-const myReducer = (state, action, types) => ...
-```
+Path nesting + callback nesting we have not covered yet. No new APIs are necessary to know. It's just important to know the behavior of how paths and callbacks are treated when nested:
 
-> reducers typically didn't have this 3rd argument, but obviously it's the only way to gurantee our namespacing with a proxy object. In general, this solves you tons of lines importing action creators, reducers, and types! It's a very natural extension to how Redux has been used in the *"first era of Redux."*
+- Sometimes you may went to concatenate/append paths, other times not.
+- Sometimes you may want a callback to run every time you *first* enter a group of routes, other times not.
+- **When neither are put to use, you are only making use of namespacing.** 
 
+Making these decisions is as simple as supplying key/vals for `path` or callbacks like `onEnter`.
 
-3) And last but not least, **route** callbacks must only be passed the correct namespaced slices:
+Let's take a look:
 
-```js
-createModule({
-  reducers: {
-    user: (state, action, types) => ...,
-  },
-  routes: {
-    HOME: {
-      path: '/',
-      beforeEnter: ({ getState, actions }) => {
-        if(!getState().user) return actions.login()
-      }
-    },
-    LOGIN: '/login',
-  }
-})
-```
-> So once this module is aliased, the real slices accessed under the hood are: `getState().moduleName.user` and `actions.moduleName.login`
-
-
-Routes however require additional considerations regarding modules + nesting:
-
-- their paths must not conflict
-
-For example, when a 3rd party **Stripe** component has a route with the path `/cart`, the parent module that imports this must be able to choose what to prefix it with, or possibly even change the path altogether. The route types must also not conflict. Namespacing route action types comes to the rescue there.
-
-### Example
+### Stripe *Respond Module* on NPM (Example)
 
 `$ yarn add respond-stripe-cart`
 
+*src/app.js:*
+
+```js
+import { createApp, Route } from 'respond-framework'
+import stripeModule from 'respond-stripe-cart'
+import mixpanel from 'mixpanel'
+import Spinner from './components/Spinner'
+
+const { store, firstRoute } = createApp({
+  reducer, // previously in Reduxlandia: createStore(reducer, initialState, enhancer)
+  initialState
+  enhancer,
+  components: {
+    App: (props, state, actions) => {
+      const { ShoppingCart } = state.location.components.checkout
+
+      return (
+        <div>
+          <Route path='/' component={ShoppingCart} fallback={Spinner} /> // automatically code-split
+
+          <h3>Child slices of state are not available in the parent module:</h3>
+          <span>{state.cartVisible}</span>
+
+          <h3>But the actions are</h3>
+          <button onClick={actions.checkout.openCart}>OPEN CART</button>
+        </div>
+      )
+    }
+  },
+  routes: {
+    HOME: {
+      path: '/home'
+    },
+    CHECKOUT: {
+      load: () => import('respond-stripe-cart'),
+      onEnter: ({ location }) => mixpanel.track('cart_modal', location)
+    }
+  }
+}, options, middlewares)
+```
+
+*respond-stripe-cart:*
+
 ```js
 import { createModule } from 'respond-framework'
+import ModalCart from '../widgets/ModalCart'
 
 export default createModule({
   components: {
@@ -792,45 +855,9 @@ export default createModule({
 })
 ```
 
-**Now how might we include this module in a parent application?**
 
+Before examining the paths + callback behavior, let's examine what the final merged `routes` map looks like after dynamic imports are applied:
 
-
-```js
-import { createApp, Route } from 'respond-framework'
-import stripeModule from 'respond-stripe-cart'
-
-const { store, firstRoute } = createApp({
-  reducer, // previously in Reduxlandia: createStore(reducer, initialState, enhancer)
-  initialState
-  enhancer,
-  components: {
-    App: (props, state, actions) => {
-      return (
-        <div>
-          <Route path='/' component='CHECKOUT.ShoppingCart' /> // automatically code-split
-
-          <h3>Child slices of state are not available in the parent module:</h3>
-          <span>{state.cartVisible}</span>
-
-          <h3>But the actions are</h3>
-          <button onClick={actions.checkout.openCart}>OPEN CART</button>
-        </div>
-      )
-    }
-  },
-  routes: {
-    HOME: {
-      path: '/home'
-    },
-    CHECKOUT: {
-      path: '/checkout',
-      load: () => import('respond-stripe-cart'),
-    }
-  }
-}, options, middlewares)
-```
-The result is **firstly** that our final route structure--after dynamics imports are applied--is nested and looks like this:
 
 ```js
 const routes = {
@@ -838,10 +865,10 @@ const routes = {
     path: '/home'
   },
   CHECKOUT: {
-    path: '/checkout',
-    routes: { // applied nested routes
+    onEnter: ({ location }) => mixpanel.track('cart_modal', location),
+    routes: { 
       OPEN_CART: {
-        path: '/cart', // reified path: /checkout/cart
+        path: '/cart',
         thunk: ({ stripe, payload }) => stripe.findCartItems(payload)
       },
       CHARGE: {
@@ -852,45 +879,42 @@ const routes = {
         }
       },
       CONFIRMATION: {
-        path: '/thank-you', // reified path: /checkout/thank-you
+        path: '/thank-you',
       }
     }
   }
 }
 ```
 
-
-**Secondly**, the result is that we have actions namespaced with `checkout.` and paths prefixed like `'/checkout/cart'`. In essence a module also became a nested route! We could have chosen to forego the path prefixing by not including it like this:
+The part relevant to paths and callbacks is:
 
 ```js
 CHECKOUT: {
   load: () => import('respond-stripe-cart'),
+  onEnter: ({ location }) => mixpanel.track('cart', location)
 }
 ```
 
-*In which case, we used the "route" solely for its namespacing capabilities (i.e. not path nesting, and not thunk nesting).* ***This is the essence of how Respond circumvents name collisions like ES6 Modules!***
+As we can see there is an `onEnter` callback for the entire group of nested routes (aka module). On enter of this module essentially, `onEnter` will be called. If you go from `/cart` to `/thank-you` however it won't be called again. If for some reason you landed directaly on `/thank-you`, it would be called. In this scenario, this is essentially a hook to customize the behavior of a black-boxed 3rd party module.
 
+As for paths, the idea is that we are opting to have the paths `/cart` and `/thank-you` directly used in our app instead of, for example, `/checkout/cart` and `/checkout/thank-you` respectively.
 
-**Next,** as far as state goes, only the child module has access to its self-contained state, eg: `cartVisible`. Behind the scenes, the state being accessed is `state.checkout.cartVisible`. 
+To dispatch to the cart from the parent module, you would do `actions.checkout.openCart()`; and to access state from the parent module, you would access `state.checkout.cartVisible`.
 
-The real magic is not just that it has its own state, but these aspects of the implementation:
+In conclusion, we forwent the path prefixing capability of the module, but utilized namespacing + the behavior of multi-tiered callbacks.
 
-- **that we are able to defer resolution of the name selected for a module's namespace--which within a module is unknown and impossible to avoid conflicting--until the module is included in a real application parent module (e.g. when resolves to `checkout` in the above example)**
-- **that a single state store is used behind the scenes also are informed of the state slice they have access to, which is due to our babel compilation time implementation that will be described in the next section**
-
-Actions like `actions.checkout.openCart` (which of course correspond to he `OPEN_CART` route and action type) are however available throughout the whole app, in order to facilitate key capabilities like linking between modules!
-
-**Lastly**, our module's components are automatically code split via our `<Route />` component:
+**Additionally**, our module's components are automatically code split via our `<Route />` component:
 
 ```js
-<Route path='/' component='CHECKOUT.ShoppingCart' />
+const { ShoppingCart } = state.location.components.checkout
+<Route path='/' component={ShoppingCart} fallback={Spinner} />
 ```
 
-The main thing to notice is that component's are passed as a string--this is because they don't exist yet, and because they will be coming from state using these keys. State will have this:
+This will show a spinner until `ShoppingCart` appears in our `location` reducer state:
 
 ```js
 state.location.components = {
-  CHECKOUT: {
+  checkout: {
     ShoppingCart: function() {}
   }
 }
@@ -898,27 +922,27 @@ state.location.components = {
 
 Similar to the strategies used with the arguments passed to reducers and components, *components themselves are made available via dependency injection*. In this case directly via state. 
 
-If it's not loaded, you can display a spinner using suspense:
+If you are using *New React* with Suspense, you can display a spinner like this instead:
 
 ```js
-  <Suspense>
-    <Route path='/' component='CHECKOUT.ShoppingCart' />
-  </Suspense>
+const { ShoppingCart } = state.location.components.checkout
+
+<Suspense fallback={Spinner}>
+  <Route path='/' component={ShoppingCart} />
+</Suspense>
 ```
 
 Also note, that within the stripe checkout module, you could leave out the `CHECKOUT` namespacing:
 
 ```js
-  <Suspense>
-    <Route path='/' component='ShoppingCart' />
-  </Suspense>
+const { ShoppingCart } = state.location.components
+<Route path='/' component={ShoppingCart} fallback={Spinner} />
 ```
 
 
-The following section covering the compile time babel implementation will describe how components can know what module they are part of, which accordingly allows for leaving out parent module namespacing.
 
 
-### ONE LAST THING (Module Parameterization):
+## Module Parameterization:
 
 Modules can be parameterized. For example, the parent module can choose paths used by the child module:
 
@@ -946,20 +970,30 @@ CHECKOUT: {
 }
 ```
 
+## Module Props
 
-There's also a very powerful feature--similar to parameterization--for the parent module to give the child access to parent state. It's tentatively called `stateMappings`:
+There's also a very powerful feature called `moduleProps` which is similar to component `props`, but instead are ***props for an entire module***. It allows the parent module to give the child access to parent `state`, `actions` and `types`:
 
 ```js
 CHECKOUT: {
   load: () => import('respond-stripe-cart'),
-  stateMappings: {
-    user: 'session'
+  moduleProps: {
+    state: {
+      user: 'session'
+    },
+    actions: {
+      close: 'home'
+    },
+    types: {
+      CLOSE: 'HOME'
+    }
   }
 }
 ```
 
-Now anywhere within the child module, `state.session`, is available, eg:
+Now, for example, `state.user` is available as `state.session` throughout the module:
 
+*in a route:*
 ```js
 OPEN_CART: {
   path: '/cart',
@@ -967,66 +1001,55 @@ OPEN_CART: {
 },
 ```
 
-or in a component:
-
-
+*in a component:*
 ```js
 components: {
   ShoppingCart: (props, state, actions) => {
-    const { cartVisible, cartItems, session } = state
-    const { openCart, charge, back } = actions
+    const { session } = state
 
     return (
       <div>
         <h1>You ready for checkout, {session.firstName}</h1>
-        {cartVisible &&
-          <ModalCart
-            open={openCart}
-            close={back}
-            items={cartItems}
-            button={charge}
-          />
-        }
       </div>
     )
   }
 },
 ```
 
-> The idea is that the parent module has `state.user` with the user session object, and rather than duplicate this data (in some way that likely causes lots of unnecessary additional renderings), we just unveil otherwise hidden pieces of pre-existing parent state. How it's done will be described in the implementation section, but the hint is that proxies once again come to the rescue to de-couple and make this connection under the hood.
+> The idea is that `state.user` within the parent module contains the *user session object*; and rather than duplicate this data (in some way that likely causes lots of unnecessary additional renderings), we just unveil otherwise hidden pieces of pre-existing parent state. 
+
+> This also prevents us from needing multiple stores, and as we know having a single store is great for devtools debugging + writing tests
 
 
-There may also be a need for `actionMappings`, but it's not clear yet. 
-
-In short, both mappings are a form of specialized props or parameters to give child modules special access to *how the parent module sees the store*. Notice the argument/prop isn't a `store` or state value itself. Rather, it's a mapping in string form. The reason should be clear by now: 
-
-#### The same store is used across all modules; we are just using *guaranteed to be unique non-conflicting naming* to key into it! This is our secret sauce.  
-
-
-
-### Big Picture Conclusion
+## Big Picture Conclusion
 
 Weirdly enough, as straightforward as it is, keying into a flat hash for namespacing is sophisticated enough to power deep trees of components with the correct state (as well as the actions and side-effects they are supposed to have access to). 
 
 Our far flatter state + side-effects system is able to run side by side with a highly nested component tree structure. 
 
-You have to keep in mind, our nested routes/modules will on average be only 2-3 levels deep, and probably max out at 5 levels for 99% of all apps. Whereas, component trees can easily go 100 levels deep. 
+You have to keep in mind, our nested routes/modules will on average be only 1-3 levels deep, and probably max out at 5 levels for 99% of all apps. Whereas, component trees can easily go 100 levels deep. 
 
 In one you can easily produce linear/horizontal orchestrations of side-effect calling. In the other you are pulling out your hair, asking: "where is XYZ happening!!?!?!?!???"
 
-**Respond Framework** merges and reconciles the best of both worlds via a compile-time-generated namespacing system.
+**Respond Framework** merges and reconciles the best of both worlds via a compile-time-generated namespacing system. Let's learn how that works in the implementation notes:
 
 
 
 
-## Implementation
+## Module System Implementation Notes
+
+The *Respond* Babel + Webpack plugins are the secret sauce to unlocking our module system. Without static compile-time information + Webpack stats, it's impossible to create these mini application modules. 
+
+> ASIDE: the **big idea** behind *Respond Modules* is that React's components are modular at a too small a micro level, whereas *Respond Modules* are modular at a higher/larger level. They unlock a sweet spot in terms of how broad the perspective is through which you see portions of your app. **In essence, *Respond Modules* are giant components.**
+
+Let's take a look at the key compilation-time steps necessary to create this *brave new world:*
 
 
-### 1) Statically discover ALL routes + `generate ROUTES_MANIFEST`
+### 1) Statically generate `ROUTES_MANIFEST`
 
-In order for any one code split module to link to another module (via actions) we need the bare minimum amount of information to generate all our action creators (hereon known simply as *"actions"*). 
+In order for any one code split module to link to another module (via actions) we need the bare minimum amount of information to **generate ALL our action creators** (hereon known simply as *"actions"*). 
 
-Initially *Respond* had a `createScene` utility function which generates action creators based on your routesMap. 80% of the time it can generate an action creator based on just the `type` string. There are a few edge cases that require a few more pieces of info, but not code like thunk callbacks, and certainly not components and reducers.
+*Respond* can generate an action creator based *solely* on its route `type`.
 
 Therefore, in order to create all actions an app has, all we have to do is get to the client a minimal `routesMap` containing only the `type` keys + nesting information (i.e. lots of empty objects) like this:
 
@@ -1054,37 +1077,31 @@ Based on that we can be on the homepage and dispatch you straight to the confirm
 
 ```js
 const HomePage = (props, state, actions) => {
-  return <button onClick={actions.checkout.step3.confirmation} />
+  return <button onClick={actions.checkout.step3.confirmation}>GO TO CONFIRMATION</button>
 }
 ```
 
-The expectation is that all intermediary routes/namespaces will be loaded.
+But to merge all the routes from separate chunks, a Webpack plugin is needed:
 
-> VERY IMPORTANT THING TO NOTE: routes, when acting as a parent route are doubling as both module namespacing *and nesting*. It's a "collapsing" of capabilities under a singular/simple API.
+### 2) Webpack Plugin
 
-As far as implementation, our `codeSplit('load')` middleware will be sure to load *all intermediary* routes in parallel. 
+Via the stats generated by Webpack, we are able to find the entry file of each dynamic import, aka "chunk," which contains a call to `createModule`, and therefore a map of `routes`.
 
+In combination with our Babel Plugin, we extract the routes, and merge them into `ROUTES_MANIFEST` above.
 
+> NOTE: it's a requirement that routes are static and not generated; this also forces conformity among *Respond* apps
 
-### 2) The Discovery
-
-Essentially we need to track each `import()` from top to bottom. Each dynamically imported module becomes a significant "boundary" we use to assign namespacing. This information is provided to us by webpack stats.
-
-For example, the `modules/checkout` module will have many components imported into the primary component--they will also be assigned the `CHECKOUT` module. 
-
-Most importantly, at the file location of each dynamic module, we extract the routes statically. The means routes can't be generated dynamically. They must exist in files like `modules/checkout.js` like this:
-
-```js
-routes: {
-  STEP1: {},
-  ETC: {}
-}
-```
+During the merging, we strip away all callbacks, reducers, components, etc, so that the manifest is a very small # of KBs. Usually about 1kb gzipped in the end.
 
 
-### 3) Namespace Assignment to Files
 
-As mentioned above, descendant components not directly within the module boundary file, need to be assigned the correct module. This is so they are assigned the correct slice of state (and actions) in one of our components, eg:
+### 3) Babel Plugin + Namespacing Components
+
+As described many times above, components need to be be passed state + actions namespaced to their module.
+
+Components also need to conform to our global store-centric interface.
+
+To these ends, our babel plugin therefore produces the following extremely simple (and therefore reliable) transformation:
 
 ```js
 //INPUT:
@@ -1099,20 +1116,124 @@ const MyComponentOriginal = (props, state, actions) => {
   return <div>{state.title}</div>
 }
 
-// and then simply use it as a function within the template:
+// and then simply use it as a function in conjunction with our context-powered React Hook:
 export const MyComponent = (props) => {
   const { state, actions } = useRespond('__respond_pending_chunk_id__')
   return MyComponentOriginal(props, state, actions)
 }
 ```
 
-Fortunately, webpack creates different chunk IDs for each chunk, and our system is carefully designed so there is a one-to-one relationship between Webpack chunks and Respond Modules! 
+> Behold the simplicity required to pass the 2 additional arguments!
 
-Therefore, after each chunk is built, we can performantly replace all occurrences of `'__respond_pending_chunk_id__'` with the `chunkId` for the given chunk. 
+Notice `'__respond_pending_chunk_id__'`. This is an identifier we can replace with something that informs `useRespond` of the module/namespace the component is part of. After each chunk is built, we can replace it with the webpack chunk id like so:
 
-And after all chunks are built--**AND AFTER WE KNOW ALL MODULE ALIASES**--we can replace all occurrences of the different `chunkIds` with the actual name given to the module in userland!
+```js
+const { state, actions } = useRespond('chunk-id-generated-by-webpack')
+```
 
-We use the hooks webpack supplies for individual chunk completion and all chunk completion, respectively, for these tasks.
+The elegance of our solution is rooted in the fact that there is a *one-to-one relationship between Webpack chunks and Respond Modules*. Therefore, after each chunk is built, we can replace all occurrences of `__respond_pending_chunk_id__` with the given `chunk-id`, and from there have a stable unique identifier for each of our *Respond Modules*.
+
+**Next:** thus far, our Webpack + Babel Plugin team has been doing double duty:
+
+- **preparing the static routes manifest**
+- **namespacing components**
+
+The final step comes in Webpack's hook that is fired when all chunks are built. 
+
+At this point, the routes manifest is built, and we know the chunk IDs of each module. And since we know which chunk ID is paired to which module namespace, we have all the information we need to replace all occurrences of each chunk's ID with the actual namespace chosen by the parent module.
 
 
-## More Implementation Coming soon...
+### 4) Proxies to the Rescue
+
+Last but not least, our components, routes, and reducers are passed proxies for `state`, `actions` and `types`. This is what facilitates the dependency injection and the `moduleProps` feature.
+
+Basically, rather than copying and merging lots of objects, the proxy allows us to add dynamic capabilities to objects when accessed. For example, we can decide that parent state such as `state.user` from the above example is mapped to `state.session`. 
+
+In essence, we can add or remove keys from objects that we don't want visible to various modules. This is particularly useful for the mappings provided by `moduleProps`.
+
+----
+
+Similar to our compile-time transformations, without Proxies we couldn't do what we're doing. Using Proxies wasn't popular until last year (because of browser support). For example, a year ago *MobX* went all in on Proxies, no longer supporting browsers that don't support proxies. We are officially in an era where many companies choose not to support old browsers (i.e. IE11). I recall Remitano also had made this decision with its focus on Chrome testing.
+
+Therefore, because we are on the frontier of new/advanced technologies like custom compile-time transformations + proxies, we are also the first to achieve simplifications never before possible. In the hands of early adopters, combatants are sure to crush competitors. **Hopefully the interface presented in this article makes it very clear that much less code is needed than before with classic Redux.**
+
+
+
+## Module System Implementation Summary
+
+In conclusion, the real magic of the implementation is:
+
+- **that we are able to defer resolution of namespaces until all modules are known in a real application**
+
+- **that a single state store is used behind the scenes, while the slices being accessed are injected at compile time**
+
+- **that all actions are supplied on app load (via a routes manifest) so it's possible to link anywhere in the app, even if it isn't loaded yet**
+
+
+## Respond Middleware Implementation Notes
+
+Our async middleware pipeline is the true backbone of *Respond Framework*.
+
+Based on Koa Compose, our pipeline is what the Redux pipeline would look like if it was asynchronous and specialized toward routing. It's extremely powerful. 
+
+We also have our own custom History API. We no longer depend on the `history` package on NPM. 
+
+By coupling our own `History` package with our async pipeline, we are able to do some things never done before in the routing world:
+
+- **we can keep a perfect record of the browser's hidden history entries!** *(world first)*
+- we can make it so when the browser back/next button's are used, redirects, blocking, and the idiosyncracies of bailing out of route changes is completely normalized. In other words, it's completely transparent/invisible to your app whether back/next buttons were used or buttons within your app.
+
+Here's a quick list of middleware capabilities that haven't gotten their due attention in this article:
+
+- callback caching
+- automatic dispatch of callback returns
+- built-in anonymous thunk middleware
+- built-in pathless route middleware
+- scroll restoration middleware
+- change page title middleware
+- automatic creation of action creators out of routes
+- return false to block route changes
+- thorough URL marhasling (params, query, hash, basename, entry state)
+- route level middleware customization
+- chunk flushing for SSR/Splitting
+- code splitting middleware
+- global callbacks
+- changeBasename action
+- redirect action
+- notFound action
+- addRoutes action
+- prefetching (both chunks + callbacks)
+- ready state (i.e. all async work is done)
+- automatic creation of complete/error action creators
+- pref/from objects in state
+- history entries, index, length
+- direction moving along history entries track (backward, forward)
+- additional state info: status, kind, components, chunks, universal, pop, and more
+- **easy ability to customize the middleware pipeline array**
+- **and lots more**
+
+
+*Respond Framework's* routing capabilities are truly its crown jewel. Remitano already chose the RFR path, so less needs to be said about this. I'll be sharing more in the form of its actual documentation. The important thing for now is you're signed on to *Respond's* modular approach and conventions to structuring your app. 
+
+
+## NEXT STEPS (Incremntal Adoption Strategy)
+
+Basically, what needs to be done first is this:
+
+- continue using RFR
+- replace Immutable with native data structures
+- replace redux-actions with standard reducers + manually created action creators/types
+- **move sagas onto route thunks** *(this is the big one)*
+- use store from `context` instead of the globally imported `_store` technique; similarly fix other globals
+
+
+I still have some work to do to get this fully ready for you guys (should you choose to dive in with me). So the goal is: during the time you're doing the above fixes, I'll finalize the missing pieces in code and docs for Respond Framework. 
+
+Lastly, I'll do a sample of the above for the HOME + LOGIN sections of your app (i.e. using Redux-First-Router as you're currently using it). And I'll provide a second *non-functioning* sample of what it would look like taken all the way with *Respond*. I'll get these done next week.
+
+One more thing: by the end of this week, I'm going to provide you with a condensed article that reads more like a succinct walkthrough of capabilities. Consider what you're reading now more like a pitch. What I'd like to get you doesn't compare itself to other solutions, but just walks you through its defining features, similar to: https://reach.tech/router . I know reading the above is cumbersome for your developers, who just want to get the gist. 
+
+Thank you for reading, and please see this all as part of my process; I will continue to refine until what gets to you is seamless for your team to interface with. Your team is more than welcome to ask me questions in chat. This might be a fun thing for them. I have endless documentation to now write, so I'll be posting more frequently now as it's produced. If you and your developers prefer to engage when it's all ready, that's fine too. But consider me part of your team--I have your slack open all day every day now.
+
+
+
