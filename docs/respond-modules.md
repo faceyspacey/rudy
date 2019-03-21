@@ -1236,4 +1236,11 @@ One more thing: by the end of this week, I'm going to provide you with a condens
 Thank you for reading, and please see this all as part of my process; I will continue to refine until what gets to you is seamless for your team to interface with. Your team is more than welcome to ask me questions in chat. This might be a fun thing for them. I have endless documentation to now write, so I'll be posting more frequently now as it's produced. If you and your developers prefer to engage when it's all ready, that's fine too. But consider me part of your team--I have your slack open all day every day now.
 
 
+## FINAL THOUGHT
+
+I just realized, after preparing this long doc, I barely emphasized that this solution is **AUTOMATICALLY CODE SPLIT!!**
+
+So basically, given that *Respond modules* are included only through code splitting (dynamic imports), and given that your app is exclusively built out of *Respond Modules*, it means code splitting is a frictionless act. Spitting out to a new chunk is as easy as grouping routes into another module. A module can contain just one route too. 
+
+So with this structure, splitting will never be an afterthought, but just a mundane part of your routine you get for free.
 
