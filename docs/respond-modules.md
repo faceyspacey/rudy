@@ -2,6 +2,8 @@
 
 The following is an explanation of the *big picture* problems solved by **Respond Framework** plus a description of key parts of our *implementation*.
 
+![Respond Framework Homepage](./respondhomepage.png)
+
 
 ## Big Picture (MODULARITY + LINEAR SIDE-EFFECTS MANAGEMENT)
 
@@ -561,13 +563,16 @@ const routes = {
 }
 ```
 
-will result in the corresponding action creator automatically injected in to components:
+will result in the corresponding action creator automatically injected in to components (and already bound to `dispatch`):
 
 ```js
 const RespondComponent = (props, state, actions) => <button onClick={actions.home}>HOME</button>
 ```
 
-Then there is also: `actions.posts.complete()` which is automatically generated, and several others.
+> These are some of the benefits of `dependency injection` rather than having to `import` action creators into all your files.
+
+
+Then there is also: `actions.posts.complete()`and `actions.posts.error()` which are automatically generated.
 
 
 When using Respond Modules, the actions appear namespaced like this: `actions.moduleName.morePossibleNesting.home()`.
@@ -585,36 +590,68 @@ import { MyComponentB as Component } from './MyComponentB.js'
 ```
 
 
-*MyComponentB.s*
+*MyComponentB.js*
 ```js
 export const MyComponentB = (props, state, actions) => {}
-
-export const YetAnotherComponentEtc = (props, state, actions) => {}
 ```
 
 
 The defining part you're looking at is `as Component`. In other words, the ability for parent modules to alias names from the child module is the crux of avoiding name collision in a module system.
 
-We need this capability everywhere we go in Respond:
+We need this capability everywhere we go in *Respond*:
 
-- components
-- reducers
-- action types
-- routes (which are the basis for action types)
+- **COMPONENTS:** actions + state keys passed to components
+- **REDUCERS:** action types passed to reducers
+- **ROUTES:** the state keys + action creators passed to route callbacks
 
-That means components must access only a slice of state corresponding to their module. The actions made available must only be the ones created out of the routes within the module.
 
-Reducers, as within `combineReducers` already do that, but must also be passed a 3rd argument containing `types`:
+1) That means **components** must access only a slice of state corresponding to their module. The actions made available must only be the ones created out of the routes within the module.
+
+
+For example in:
+
+```js
+export const MyComponentB = (props, state, actions) => {}
+```
+
+`state` is actually `state.someModule` and `actions` is actually `actions.someModule`, but within a component from a given module, this is "transparent." A proxy for each object is used which is smart enough to tap into the correct namespace.
+
+
+2) Similarly, **reducers** must be passed a 3rd argument containing `types`:
 
 ```js
 const myReducer = (state, action, types) => ...
 ```
 
-And of course those `types` most only be the `types` corresponding to the given module.
+> reducers typically didn't have this 3rd argument, but obviously it's the only way to gurantee our namespacing with a proxy object. In general, this solves you tons of lines importing action creators, reducers, and types! It's a very natural extension to how Redux has been used in the *"first era of Redux."*
 
-> aside: passing `types` as a 3rd argument to reducers will be covered in the implemtation section, but basically, this approach allows for the *dependency-injection-like* ability to manipulate exactly what `types` are accessible in the reducer, which in our case allows us to avoid collisions via namespacing. 
 
-And last but not least, routes and their paths must not conflict. For example, when a 3rd party **Stripe** component has a route with the path `/cart`, the parent module that imports this must be able to choose what to prefix it with, or possibly even change the path altogether. The route types must also not conflict. Namespacing route action types comes to the rescue there.
+3) And last but not least, **route** callbacks must only be passed the correct namespaced slices:
+
+```js
+createModule({
+  reducers: {
+    user: (state, action, types) => ...,
+  },
+  routes: {
+    HOME: {
+      path: '/',
+      beforeEnter: ({ getState, actions }) => {
+        if(!getState().user) return actions.login()
+      }
+    },
+    LOGIN: '/login',
+  }
+})
+```
+> So once this module is aliased, the real slices accessed under the hood are: `getState().moduleName.user` and `actions.moduleName.login`
+
+
+Routes however require additional considerations regarding modules + nesting:
+
+- their paths must not conflict
+
+For example, when a 3rd party **Stripe** component has a route with the path `/cart`, the parent module that imports this must be able to choose what to prefix it with, or possibly even change the path altogether. The route types must also not conflict. Namespacing route action types comes to the rescue there.
 
 ### Example
 
@@ -664,7 +701,7 @@ export default createModule({
       path: '/cart',
       thunk: ({ stripe, payload }) => stripe.findCartItems(payload)
     },
-    CHARGE: { // pathless route
+    CHARGE: { // pathless route -- pathless routes are how we can use our routesMap for all actions!
       thunk: async ({ stripe, payload, actions }) => {
         const { amount } = payload
         await stripe.charge(amount)
@@ -683,7 +720,7 @@ export default createModule({
 
 
 ```js
-import createApp, { Route } from 'respond-framework'
+import { createApp, Route } from 'respond-framework'
 import stripeModule from 'respond-stripe-cart'
 
 const { store, firstRoute } = createApp({
@@ -762,8 +799,7 @@ CHECKOUT: {
 The real magic is not just that it has its own state, but these aspects of the implementation:
 
 - **that we are able to defer resolution of the name selected for a module's namespace--which within a module is unknown and impossible to avoid conflicting--until the module is included in a real application parent module (e.g. when resolves to `checkout` in the above example)**
-- **that a single state store is used behind the secnes, allowing for easy testing + time traveling**
-- **that descendant components within the same module also are informed of the state slice they have access to, which is due to our babel compilation time implementation that will be described in the next section**
+- **that a single state store is used behind the scenes also are informed of the state slice they have access to, which is due to our babel compilation time implementation that will be described in the next section**
 
 Actions like `actions.checkout.openCart` (which of course correspond to he `OPEN_CART` route and action type) are however available throughout the whole app, in order to facilitate key capabilities like linking between modules!
 
@@ -793,7 +829,7 @@ If it's not loaded, you can display a spinner using suspense:
   </Suspense>
 ```
 
-Also note, that within the stripe checkout module, you could leave out the `CHECKOUT` namepsacing:
+Also note, that within the stripe checkout module, you could leave out the `CHECKOUT` namespacing:
 
 ```js
   <Suspense>
@@ -885,13 +921,15 @@ components: {
 
 There may also be a need for `actionMappings`, but it's not clear yet. 
 
-In short, both mappings are form of specialized props or parameters to give child modules special access to *how the parent module sees the store*. Notice the argument/prop isn't a `store` or state value itself. Rather, it's a mapping in string form. The reason should be clear by now: **the same store is used across all modules; we are just using guaranteed to be unique non-conflicting naming to key into it!** This is our secret sauce.  
+In short, both mappings are a form of specialized props or parameters to give child modules special access to *how the parent module sees the store*. Notice the argument/prop isn't a `store` or state value itself. Rather, it's a mapping in string form. The reason should be clear by now: 
+
+#### The same store is used across all modules; we are just using *guaranteed to be unique non-conflicting naming* to key into it! This is our secret sauce.  
 
 
 
 ### Big Picture Conclusion
 
-Weirdly enough, as straightforward as it is, keying into a flat hash for namespacing is sophisticated enough to power deep trees of components with the correct state (as well as actions and side-effects they are supposed to have access to). 
+Weirdly enough, as straightforward as it is, keying into a flat hash for namespacing is sophisticated enough to power deep trees of components with the correct state (as well as the actions and side-effects they are supposed to have access to). 
 
 Our far flatter state + side-effects system is able to run side by side with a highly nested component tree structure. 
 
@@ -953,7 +991,7 @@ As far as implementation, our `codeSplit('load')` middleware will be sure to loa
 
 ### 2) The Discovery
 
-Essentially we need to track each `import()` from the top to the bottom. Each dynamically imported module becomes a significant "boundary" we use to assign namespacing. This information is provided to us by webpack stats.
+Essentially we need to track each `import()` from top to bottom. Each dynamically imported module becomes a significant "boundary" we use to assign namespacing. This information is provided to us by webpack stats.
 
 For example, the `modules/checkout` module will have many components imported into the primary component--they will also be assigned the `CHECKOUT` module. 
 
@@ -986,14 +1024,18 @@ const MyComponentOriginal = (props, state, actions) => {
 
 // and then simply use it as a function within the template:
 export const MyComponent = (props) => {
-  const { state, actions } = useRespond('__respond__current/file/path')
+  const { state, actions } = useRespond('__respond_pending_chunk_id__')
   return MyComponentOriginal(props, state, actions)
 }
 ```
 
 Fortunately, webpack creates different chunk IDs for each chunk, and our system is carefully designed so there is a one-to-one relationship between Webpack chunks and Respond Modules! 
 
-Therefore, after all chunks are built, we can performantly figure out the names of modules in a given chunk from webpack stats, and replace those file names (e.g: `'__respond__current/file/path'`) with the given chunkId.
+Therefore, after each chunk is built, we can performantly replace all occurrences of `'__respond_pending_chunk_id__'` with the `chunkId` for the given chunk. 
+
+And after all chunks are built--**AND AFTER WE KNOW ALL MODULE ALIASES**--we can replace all occurrences of the different `chunkIds` with the actual name given to the module in userland!
+
+We use the hooks webpack supplies for individual chunk completion and all chunk completion, respectively, for these tasks.
 
 
 ## More Implementation Coming soon...
