@@ -231,13 +231,19 @@ Therefore, it's of the utmost importance that the power of the combination of mo
 
 ## Some backstory on me and the creation of Respond Framework:
 
-Respond Framework was 80% completed as of last spring 2018. After spending almost a year since the launch of Redux-First-Router making *Respond Framework*, I made the executive decision to put all progress on hold, as the future was uncertain given all the yet-to-be-release hooks/suspense capabilities.
+*Respond Framework* was 80% completed as of last spring 2018. 
+
+> And by the way, at the time the routing aspect based on *Redux-First-Router* was called ***Rudy*** and the Redux/modules aspect called ***Remixx***. Now, it's under one roof as ***Respond Framework***.
+
+So after spending almost a year since the launch of Redux-First-Router making *"Respond Framework,"* I made the executive decision to put all progress on hold, as the future was uncertain given all the yet-to-be-release hooks/suspense capabilities.
 
 My reasoning in putting a pause on all this hard work is that I spent an entire year in 2014-2015 making an OOP framework on top of [Meteor](https://www.meteor.com), only for all my hardwork to go to waste once React (and to a lesser extent GraphQL/Apollo) completely changed the ecosystem, making Meteor essentially obsolete. This framework, by the way, was called [Ultimate MVC](https://github.com/ultimatejs/ultimate-mvc). 
 
 While I grew a ton as a developer building both frameworks (and I always say: **"YOUR MOST IMPORTANT PROJECT IS YOURSELF"**), I couldn't afford a second time for all my time to amount to just personal growth as a developer. I had to be building something that had a high probability of becoming popular and becoming a major avenue to financially thrive.
 
-**So after watching Hooks be released and much of Suspense, it's clear this competing solution doesn't solve the problems these tools solve!** And more importantly that there is in fact a perfect place in the market for this approach/framework (as the refactoring + code-splitting/ssr needs of your system are proof of).
+**So after watching Hooks be released and much of Suspense, it's clear this competing solution doesn't solve the problems these tools solve!** Also, in that time, *Respond* contributors have solved some missing pieces (primarily the proxy-based Redux usage that doesn't require `mapStateToProps`). 
+
+Most importantly, the refactoring/splitting/ssr needs of your system is proof tha that there is in fact a perfect place in the market for this approach/framework!
 
 
 
@@ -371,7 +377,7 @@ export default async function configureStore(req) {
 import ReactDOM from 'react-dom/server'
 import { Provider } from 'respond-framework'
 import configureStore from './configureStore'
-import App from './components/App'
+import App from '../src/components/App'
 
 export default async function serverRender(req, res) {
   const store = await configureStore(req)
@@ -390,7 +396,7 @@ export default async function serverRender(req, res) {
           <div id="root">${appString}</div>
           <script>window.RESPOND_STATE = ${stateJson}</script>
           <script src="/static/bootstrap.js" />
-          <script src="/static/main.js" />
+          <script src="/static/vendors.js" />
           ${scripts}
         </body>
       </html>`
@@ -398,7 +404,7 @@ export default async function serverRender(req, res) {
 }
 ```
 
-*server/index.js.js:*
+*server/index.js:*
 ```js
 import express from 'express'
 import serverRender from './serverRender'
@@ -1245,4 +1251,6 @@ I may have not emphasized it enough, but *Respond* is **AUTOMATICALLY CODE SPLIT
 So basically, given that *Respond modules* are included only through code splitting (dynamic imports), and given that a *Respond* app is exclusively built out of *Respond Modules*, **it means code splitting is a frictionless act**. Splitting out to a new chunk is as easy as grouping routes into another module. A module can contain just one route too. 
 
 So with this structure, splitting will never be an afterthought, but just a mundane part of your routine **you get for free**.
+
+*NextJS* is also automatically code-split. But the way you design your app is page-based like in the PHP days. So what *NextJS* does for pages + standard React apps, *Respond* does for routes + Redux apps. SSR in both is also automatic, though a little less automatic in *Respond*, and instead *flexible* while *simple*. In other words, *Respond* doesn't box you into a **"walled garden"** for how you must use Node + Webpack like *Next*. Instead, it's a ***pattern*** for low level Node + Webpack usage, with constraints/opinions only in terms of how you React.
 
