@@ -1,7 +1,7 @@
 // @flow
 import { redirect } from '../../actions'
 import type { RoutesMap, ReceivedAction } from '../../index'
-import type { To } from './toUrl'
+import type { To } from './toUrlAndAction'
 
 export type OnClick = false | ((SyntheticEvent) => ?boolean)
 export default (
@@ -12,9 +12,9 @@ export default (
   onClick?: ?OnClick,
   target: ?string,
   isRedirect?: boolean,
-  e: SyntheticEvent,
   fullUrl: string,
-  history: Object
+  history: Object,
+  e: SyntheticEvent
 ) => {
   const prevented = e.defaultPrevented
   const notModified = !isModified(e)
@@ -27,7 +27,6 @@ export default (
   if (!target && e && e.preventDefault && notModified) {
     e.preventDefault()
   }
-
 
   if (
     action &&
