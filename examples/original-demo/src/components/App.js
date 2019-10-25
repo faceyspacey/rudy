@@ -13,5 +13,5 @@ export default () =>
       <Switcher />
     </div>
 
-    <DevTools />
+    {/* <DevTools /> */}
   </div>

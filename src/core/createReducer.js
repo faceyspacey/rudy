@@ -32,7 +32,7 @@ export default (initialState: Object, routes: RoutesMap) => (
     //   : true
 
     // st.ready === false ? true : false
-    console.log(action.type, s.ready)
+
     return s
   }
 
