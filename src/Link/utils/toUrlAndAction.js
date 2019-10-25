@@ -1,7 +1,6 @@
 // @flow
 import resolvePathname from 'resolve-pathname'
 import { actionToUrl, toAction } from '../../utils'
-import { stripBasename, findBasename } from '../../history/utils'
 import type { RoutesMap, Options } from '../../flow-types'
 
 export type To = string | Array<string> | Object
@@ -34,7 +33,7 @@ export default (
     action = to
 
     try {
-      url = actionToUrl(action, { routes, options })
+      url = actionToUrl(action, { routes, options }).url
       basename = action.basename || basename || ''
     }
     catch (e) {
@@ -74,3 +73,10 @@ export default (
   const fullUrl = isExternal ? url : basename + url
   return { fullUrl, action }
 }
+
+// TO DO put in utils folder and re-use across project
+const findBasename = (path, bns = []) =>
+  bns.find(bn => path.indexOf(bn) === 0)
+
+const stripBasename = (path, bn) =>
+  path.indexOf(bn) === 0 ? path.substr(bn.length) : path

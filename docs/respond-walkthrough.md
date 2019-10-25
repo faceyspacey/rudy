@@ -6,8 +6,6 @@ Respond Framework is what happens if you build Redux & first-class concerns for 
 Here's a quick overview of the features and usage in Respond Framework.
 
 
-![Respond Framework Homepage](./docs/respond-homepage.png)
-
 
 
 ## Installation

@@ -229,7 +229,7 @@ export default class History {
     let { params, query, state, hash, basename: bn } = action
 
     if (params) {
-      params = typeof params === 'function' ? params(entry.query) : params
+      params = typeof params === 'function' ? params(entry.params) : params
       entry.params = { ...entry.params, ...params }
     }
 
@@ -240,7 +240,6 @@ export default class History {
 
     if (state) {
       state = typeof state === 'function' ? state(entry.state) : state
-
       entry.state = { ...entry.state, ...state }
     }
 

@@ -19,7 +19,7 @@ export default (req) => {
 // only state can be set before route change is committed,
 // as otherwise the prev URL would change and break BrowserHistory entries tracking
 // NOTE: we could greatly change the implementation to support this small thing, but its not worth the complexity;
-// even just supporting setState on a previous route (while in the pipeline) is frill, but we'll soon see if people
+// even just supporting setState on a previous route (while in the pipeline) is a frill, but we'll soon see if people
 // get use out of it.
 
 const handleEdgeCaseForSet = ({ ctx, tmp, commitDispatch, history }, args) => {

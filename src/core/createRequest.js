@@ -134,7 +134,7 @@ export class Request {
     delete this.ctx.confirm
 
     if (!canLeave) {
-      return this.realDispatch({ type: UNBLOCK })
+      return this.realDispatch({ type: UNBLOCK }) // unblock for now; if the user doesn't meet the application's conditions, `false` will inevitably be returned from a callback and the user blocked again
     }
 
     // When `false` is returned from a `call` middleware, you can use `req.confirm()` or the corresponding action
@@ -147,7 +147,7 @@ export class Request {
     const route = prev ? this.prevRoute : this.route
     const callback = route[name]
 
-    delete route[name]
+    delete route[name] // yea, this is somewhat of a hack; when better ideas come to our mind clearly, we will replace it
 
     return this.realDispatch(this.action)
       .then(res => {

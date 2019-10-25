@@ -23,6 +23,6 @@ export default class MemoryHistory extends History {
     opts.restore = opts.restore || (useSession && restoreHistory)
     opts.save = opts.save || (useSession && saveHistory)
 
-    return opts.restore ? opts.restore(this) : toEntries(this, ents, i, n) // when used as a browser fallback, we restore from sessionStorage
+    return opts.restore ? opts.restore(this, ents, i, n) : toEntries(this, ents, i, n) // when used as a browser fallback, we restore from sessionStorage
   }
 }

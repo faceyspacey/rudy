@@ -148,7 +148,7 @@ const notFoundUrl = (action, routes, opts: Options, query, hash, prevRoute: Obje
       : 'NOT_FOUND'
 
   const p = routes[t].path || routes.NOT_FOUND.path
-  const s = query ? opts.stringifyQuery(query, { addQueryPrefix: true }) : '' // preserve these (why? because we can)
+  const s = query ? `?${opts.stringifyQuery(query)}` : '' // preserve these (why? because we can)
   const h = hash ? `#${hash}` : ''
 
   return p + s + h
