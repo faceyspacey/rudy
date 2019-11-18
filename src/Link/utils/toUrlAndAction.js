@@ -34,7 +34,9 @@ export default (
 
     try {
       url = actionToUrl(action, { routes, options }).url
-      basename = action.basename || basename || ''
+      basename = typeof action.basename !== 'undefined'
+        ? action.basename
+        : basename || ''
     }
     catch (e) {
       if (process.env.NODE_ENV === 'development') {

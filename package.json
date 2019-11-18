@@ -1,7 +1,7 @@
 {
-  "name": "redux-first-router",
-  "version": "0.0.4-rudy",
-  "description": "think of your app in states not routes (and, yes, while keeping the address bar in sync)",
+  "name": "respond-framework",
+  "version": "0.0.2",
+  "description": "Don't just React, Respond!",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist",

@@ -203,7 +203,7 @@ export default class BrowserHistory extends History {
     return new Promise(resolve => {
       const url = typeof actOrUrl === 'string' ? actOrUrl : actOrUrl.location.url
       const ready = () => {
-        console.log('ready', url, locationToUrl(window.location))
+        // console.log('ready', url, locationToUrl(window.location))
         return url === locationToUrl(window.location)
       }
       return tryChange(ready, resolve, name, this)
@@ -228,7 +228,7 @@ const rapidChangeWorkaround = (ready, complete, name) => {
   tries++
 
   if (!ready() && tries < maxTries) {
-    console.log('tries', tries + 1, name)
+    // console.log('tries', tries + 1, name)
     setTimeout(() => rapidChangeWorkaround(ready, complete, name), 9)
   }
   else {
