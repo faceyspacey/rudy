@@ -2,10 +2,21 @@ import { call } from './index'
 
 export default (...names) => (api) => {
   names[0] = names[0] || 'thunk'
-  names[1] = names[1] || 'onComplete'
+  names[1] = names[1] || 'beforeEnter'
+  names[2] = names[2] || 'onComplete'
 
-  const middlewares = names.map(name => {
+  const callbacks = [names[1], names[0], names[2]]
+
+  const middlewares = callbacks.map(name => {
     return call(name, { skipOpts: true })
+  })
+
+  middlewares.splice(1, 0, api => (req, next) => {
+    if (req.route.dispatch !== false) {
+      req.action = req.commitDispatch(req.action)
+    }
+
+    return next()
   })
 
   const pipeline = api.options.compose(middlewares, api)
@@ -21,10 +32,6 @@ export default (...names) => (api) => {
     const isPathless = route && !route.path
 
     if (isPathless && hasCallback(route, names)) {
-      if (route.dispatch !== false) {
-        req.action = req.commitDispatch(req.action)
-      }
-
       return pipeline(req).then(res => res || req.action)
     }
 
